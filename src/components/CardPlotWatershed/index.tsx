@@ -38,10 +38,10 @@ const CardPlot: React.FC<CardProps> = ({ year, watershed }) => {
       </div>
 
       <label>Cobertura e uso do solo (1990 - 2018)</label>
-      <StackPlot watershed={watershed} tableName="landuse" />
+      <StackPlot watershed={watershed} tableName="agb" />
 
       <label>Cobertura e uso do solo {year}</label>
-      <Barplot year={year} watershed={watershed} tableName="landuse" />
+      <Barplot year={year} watershed={watershed} tableName="agb" />
     </Container>
   );
 };

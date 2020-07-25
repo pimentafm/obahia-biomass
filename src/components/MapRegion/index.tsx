@@ -19,7 +19,7 @@ import { Container } from './styles';
 import Menu from '../Menu';
 import Footer from '../Footer';
 
-import CardPlot from '../CardPlot';
+// import CardPlot from '../CardPlot';
 
 import Popup from '../../components/Popup';
 
@@ -29,7 +29,10 @@ interface MapProps {
 }
 
 const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
-  const [landuse] = useState(new TileLayer({ visible: true }));
+  const [agb] = useState(new TileLayer({ visible: true }));
+  const [bgb] = useState(new TileLayer({ visible: false }));
+  const [soc] = useState(new TileLayer({ visible: false }));
+
   const [highways] = useState(new TileLayer({ visible: false }));
   const [hidrography] = useState(new TileLayer({ visible: false }));
   const [watersheds] = useState(new TileLayer({ visible: true }));
@@ -55,7 +58,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     new OlMap({
       controls: [],
       target: undefined,
-      layers: [osm, landuse, watersheds, counties, highways, hidrography],
+      layers: [osm, soc, bgb, agb, watersheds, counties, highways, hidrography],
       view: view,
       interactions: defaults({
         keyboard: false,
@@ -99,11 +102,31 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
     serverType: 'mapserver',
   });
 
-  const landuse_source = new TileWMS({
-    url: wms.defaults.baseURL + 'landuseRegion.map',
+  const agb_source = new TileWMS({
+    url: wms.defaults.baseURL + 'agbRegion.map',
     params: {
       year: year,
-      LAYERS: 'landuse',
+      LAYERS: 'agb',
+      TILED: true,
+    },
+    serverType: 'mapserver',
+  });
+
+  const bgb_source = new TileWMS({
+    url: wms.defaults.baseURL + 'bgbRegion.map',
+    params: {
+      year: year,
+      LAYERS: 'bgb',
+      TILED: true,
+    },
+    serverType: 'mapserver',
+  });
+
+  const soc_source = new TileWMS({
+    url: wms.defaults.baseURL + 'socRegion.map',
+    params: {
+      year: year,
+      LAYERS: 'soc',
       TILED: true,
     },
     serverType: 'mapserver',
@@ -116,7 +139,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   counties.set('name', 'counties');
   counties.setSource(counties_source);
   counties.getSource().refresh();
-  
+
   highways.set('name', 'highways');
   highways.setSource(highways_source);
   highways.getSource().refresh();
@@ -125,9 +148,17 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   hidrography.setSource(hidrography_source);
   hidrography.getSource().refresh();
 
-  landuse.set('name', 'landuse');
-  landuse.setSource(landuse_source);
-  landuse.getSource().refresh();
+  agb.set('name', 'agb');
+  agb.setSource(agb_source);
+  agb.getSource().refresh();
+
+  bgb.set('name', 'bgb');
+  bgb.setSource(bgb_source);
+  bgb.getSource().refresh();
+
+  soc.set('name', 'soc');
+  soc.setSource(soc_source);
+  soc.getSource().refresh();
 
   const handleYear = useCallback(
     y => {
@@ -150,9 +181,9 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
         map={map}
       />
 
-      <Popup map={map} source={landuse_source} />
+      <Popup map={map} source={agb_source} />
 
-      <CardPlot year={year} />
+      {/* <CardPlot year={year} /> */}
 
       <Footer id="footer" map={map} />
     </Container>

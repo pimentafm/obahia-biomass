@@ -15,7 +15,7 @@ interface BarplotProps {
 }
 
 const Barplot: React.FC<BarplotProps> = ({ year, watershed, tableName }) => {
-  const [landuse, setData] = useState([]);
+  const [agb, setData] = useState([]);
 
   const [colors] = useState([
     '#004000',
@@ -44,7 +44,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, watershed, tableName }) => {
   const data = [
     {
       x: xaxis,
-      y: landuse,
+      y: agb,
       stackgroup: 'one',
       type: 'bar',
       marker: { color: colors },

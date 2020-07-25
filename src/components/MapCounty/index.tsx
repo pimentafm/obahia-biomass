@@ -19,7 +19,7 @@ import { Container } from './styles';
 import Menu from '../Menu';
 import Footer from '../Footer';
 
-import CardPlot from '../CardPlotCounty';
+// import CardPlot from '../CardPlotCounty';
 
 import Popup from '../../components/Popup';
 
@@ -40,7 +40,10 @@ const Map: React.FC<MapProps> = ({
   defaultCategory,
   defaultCodeName,
 }) => {
-  const [landuse] = useState(new TileLayer({ visible: true }));
+  const [agb] = useState(new TileLayer({ visible: true }));
+  const [bgb] = useState(new TileLayer({ visible: false }));
+  const [soc] = useState(new TileLayer({ visible: false }));
+
   const [highways] = useState(new TileLayer({ visible: false }));
   const [hidrography] = useState(new TileLayer({ visible: false }));
 
@@ -65,7 +68,7 @@ const Map: React.FC<MapProps> = ({
     new OlMap({
       controls: [],
       target: undefined,
-      layers: [osm, landuse, highways, hidrography],
+      layers: [osm, soc, bgb, agb, highways, hidrography],
       view: view,
       interactions: defaults({
         keyboard: false,
@@ -93,12 +96,34 @@ const Map: React.FC<MapProps> = ({
     serverType: 'mapserver',
   });
 
-  const landuse_source = new TileWMS({
-    url: wms.defaults.baseURL + 'landuseCounties.map',
+  const agb_source = new TileWMS({
+    url: wms.defaults.baseURL + 'agbCounties.map',
     params: {
       year: year,
       code: codeName.code,
-      LAYERS: 'landuse',
+      LAYERS: 'agb',
+      TILED: true,
+    },
+    serverType: 'mapserver',
+  });
+
+  const bgb_source = new TileWMS({
+    url: wms.defaults.baseURL + 'bgbCounties.map',
+    params: {
+      year: year,
+      code: codeName.code,
+      LAYERS: 'bgb',
+      TILED: true,
+    },
+    serverType: 'mapserver',
+  });
+
+  const soc_source = new TileWMS({
+    url: wms.defaults.baseURL + 'socCounties.map',
+    params: {
+      year: year,
+      code: codeName.code,
+      LAYERS: 'soc',
       TILED: true,
     },
     serverType: 'mapserver',
@@ -112,9 +137,17 @@ const Map: React.FC<MapProps> = ({
   hidrography.setSource(hidrography_source);
   hidrography.getSource().refresh();
 
-  landuse.set('name', 'landuse');
-  landuse.setSource(landuse_source);
-  landuse.getSource().refresh();
+  agb.set('name', 'agb');
+  agb.setSource(agb_source);
+  agb.getSource().refresh();
+
+  bgb.set('name', 'bgb');
+  bgb.setSource(bgb_source);
+  bgb.getSource().refresh();
+
+  soc.set('name', 'soc');
+  soc.setSource(soc_source);
+  soc.getSource().refresh();
 
   const handleYear = useCallback(
     y => {
@@ -171,9 +204,9 @@ const Map: React.FC<MapProps> = ({
         map={map}
       />
 
-      <Popup map={map} source={landuse_source} />
+      <Popup map={map} source={agb_source} />
 
-      <CardPlot year={year} code={codeName.code} />
+      {/* <CardPlot year={year} code={codeName.code} /> */}
 
       <Footer id="footer" map={map} />
     </Container>

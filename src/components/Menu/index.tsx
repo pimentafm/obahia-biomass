@@ -68,11 +68,11 @@ const Menu: React.FC<MenuProps> = ({
   const [downloadURL, setDownloadURL] = useState('');
 
   const termsOfUse = HtmlParser(
-    `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> Serie Temporal de Uso e Cobertura do Solo - Termos de uso</span>`,
+    `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> Serie Temporal de Carbono no Solo - Termos de uso</span>`,
   );
 
   const additionalInformation = HtmlParser(
-    `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> Serie Temporal de Uso e Cobertura do Solo - Informações adicionais</span>`,
+    `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> Serie Temporal de Carbono no Solo - Informações adicionais</span>`,
   );
 
   const [categories] = useState([
@@ -208,22 +208,22 @@ const Menu: React.FC<MenuProps> = ({
     switch (defaultCategory) {
       case 'Regional':
         setDownloadURL(
-          `ftp://obahia.dea.ufv.br/landuse/region/landuse${defaultYear}.tif`,
+          `ftp://obahia.dea.ufv.br/biomass/region/AGB${defaultYear}.tif`,
         );
         break;
       case 'Bacia hidrográfica':
         setDownloadURL(
-          `ftp://obahia.dea.ufv.br/landuse/gcc/${defaultWatershed}/landuse${defaultYear}.tif`,
+          `ftp://obahia.dea.ufv.br/biomass/gcc/${defaultWatershed}/AGB${defaultYear}.tif`,
         );
         break;
       case 'Área de drenagem':
         setDownloadURL(
-          `ftp://obahia.dea.ufv.br/landuse/drainage/${defaultYear}/landuse_${defaultCodeName?.code}.tif`,
+          `ftp://obahia.dea.ufv.br/biomass/drainage/${defaultYear}/AGB_${defaultCodeName?.code}.tif`,
         );
         break;
       case 'Municipal':
         setDownloadURL(
-          `ftp://obahia.dea.ufv.br/landuse/counties/landuse_${defaultCodeName?.code}_${defaultYear}.tif`,
+          `ftp://obahia.dea.ufv.br/biomass/cities/AGB_${defaultCodeName?.code}_${defaultYear}.tif`,
         );
         break;
     }
@@ -256,7 +256,7 @@ const Menu: React.FC<MenuProps> = ({
 
       <Content>
         <div className="card-menu">
-          <span>Série Temporal de Uso e Cobertura do Solo</span>
+          <span>Séries Temporais de Dados de Biomassa</span>
         </div>
         <label>Nível</label>
         <Select
@@ -292,10 +292,32 @@ const Menu: React.FC<MenuProps> = ({
         </Select>
 
         <LayerSwitcher
-          name="landuse"
-          label="Uso do solo"
+          name="agb"
+          label="Biomassa acima do solo"
           handleLayerVisibility={handleLayerVisibility}
           layerIsVisible={true}
+          legendIsVisible={true}
+          layerInfoIsVisible={true}
+          switchColor="#1f5582"
+          downloadURL={downloadURL}
+        />
+
+        <LayerSwitcher
+          name="bgb"
+          label="Biomassa abaixo do solo"
+          handleLayerVisibility={handleLayerVisibility}
+          layerIsVisible={false}
+          legendIsVisible={true}
+          layerInfoIsVisible={true}
+          switchColor="#1f5582"
+          downloadURL={downloadURL}
+        />
+
+        <LayerSwitcher
+          name="soc"
+          label="Estoque de carbono"
+          handleLayerVisibility={handleLayerVisibility}
+          layerIsVisible={false}
           legendIsVisible={true}
           layerInfoIsVisible={true}
           switchColor="#1f5582"
