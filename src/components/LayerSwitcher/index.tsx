@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import Switch from 'react-switch';
 
 import { IconContext } from 'react-icons';
-import { FaInfoCircle, FaArrowAltCircleDown, FaDatabase } from 'react-icons/fa';
+import { FaArrowAltCircleDown, FaDatabase } from 'react-icons/fa';
 
 import { Divider, Tooltip } from 'antd';
 import 'antd/dist/antd.css';
@@ -57,7 +57,7 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
 
         <IconContext.Provider value={{ color: '#1f5582' }}>
           <div className="layer-info">
-            <Tooltip placement="right" title="Informações sobre a camada">
+            {/* <Tooltip placement="right" title="Informações sobre a camada">
               <FaInfoCircle
                 id="close-popup"
                 onClick={() => alert('Metadados')}
@@ -66,7 +66,7 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
                   cursor: 'pointer',
                 }}
               />
-            </Tooltip>
+            </Tooltip> */}
 
             <Tooltip placement="right" title="Download da camada">
               <FaArrowAltCircleDown
@@ -83,7 +83,10 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
               <FaDatabase
                 id="close-popup"
                 onClick={() =>
-                  window.open(`ftp://obahia.dea.ufv.br/${name}`, '_blank')
+                  window.open(
+                    downloadURL?.substring(0, downloadURL.lastIndexOf('/')),
+                    '_blank',
+                  )
                 }
                 style={{
                   fontSize: '20px',
