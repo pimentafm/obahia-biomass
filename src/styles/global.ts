@@ -43,4 +43,12 @@ export default createGlobalStyle`
     color: fff;
     background-color: #1f5582;
   }
+
+  .ant-slider-step {
+    background-color: #1f5582;
+  }
+
+  .ant-slider-handle{
+    border-color: #1f5582;
+  }
 `;

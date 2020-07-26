@@ -4,7 +4,7 @@ import Switch from 'react-switch';
 import { IconContext } from 'react-icons';
 import { FaArrowAltCircleDown, FaDatabase } from 'react-icons/fa';
 
-import { Divider, Tooltip } from 'antd';
+import { Divider, Tooltip, Slider } from 'antd';
 import 'antd/dist/antd.css';
 
 import Legend from './Legend';
@@ -19,6 +19,7 @@ interface LayerSwitcherProps {
   legendIsVisible: boolean;
   layerInfoIsVisible: boolean;
   switchColor: string;
+  handleLayerOpacity(opacity: number, lyr_name: string): void;
   handleLayerVisibility(e: boolean, obj: Object): void;
 }
 
@@ -30,9 +31,11 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
   legendIsVisible,
   layerInfoIsVisible,
   switchColor,
+  handleLayerOpacity,
   handleLayerVisibility,
 }) => {
   const [visible, setVisible] = useState(layerIsVisible);
+  const [opacity, setOpacity] = useState(1);
 
   const handleVisibility = useCallback(
     (_e, _obj, id) => {
@@ -40,6 +43,14 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
       handleLayerVisibility(!visible, id);
     },
     [visible, handleLayerVisibility],
+  );
+
+  const handleOpacity = useCallback(
+    opacity => {
+      setOpacity(opacity);
+      handleLayerOpacity(opacity, name);
+    },
+    [name, opacity, handleLayerOpacity],
   );
 
   let legend = undefined;
@@ -105,17 +116,27 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
       <div className="layer-div">
         <label>{label}</label>
 
-        <Switch
-          id={name}
-          checked={visible}
-          handleDiameter={16}
-          onChange={handleVisibility}
-          onColor={switchColor}
-          checkedIcon={false}
-          uncheckedIcon={false}
-          height={22}
-          width={44}
-        />
+        <div className="slider-switcher">
+          <Slider
+            defaultValue={1}
+            min={0}
+            max={1}
+            step={0.1}
+            style={{ width: 40, margin: 5, marginRight: 15 }}
+            onChange={handleOpacity}
+          />
+          <Switch
+            id={name}
+            checked={visible}
+            handleDiameter={16}
+            onChange={handleVisibility}
+            onColor={switchColor}
+            checkedIcon={false}
+            uncheckedIcon={false}
+            height={22}
+            width={44}
+          />
+        </div>
       </div>
 
       {legend}

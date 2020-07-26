@@ -132,6 +132,16 @@ const Menu: React.FC<MenuProps> = ({
     },
     [map],
   );
+  const handleLayerOpacity = useCallback(
+    (opacity, lyr_name) => {
+      map.getLayers().forEach(lyr => {
+        if (lyr.get('name') === lyr_name) {
+          lyr.setOpacity(opacity);
+        }
+      });
+    },
+    [map],
+  );
 
   let watershedsLabel = null;
   let watershedSelect = null;
@@ -294,6 +304,7 @@ const Menu: React.FC<MenuProps> = ({
         <LayerSwitcher
           name="agb"
           label="Biomassa acima do solo"
+          handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
           layerIsVisible={true}
           legendIsVisible={true}
@@ -305,6 +316,7 @@ const Menu: React.FC<MenuProps> = ({
         <LayerSwitcher
           name="bgb"
           label="Biomassa abaixo do solo"
+          handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
           layerIsVisible={false}
           legendIsVisible={true}
@@ -316,6 +328,7 @@ const Menu: React.FC<MenuProps> = ({
         <LayerSwitcher
           name="soc"
           label="Estoque de carbono"
+          handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
           layerIsVisible={false}
           legendIsVisible={true}
