@@ -35,7 +35,6 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
   handleLayerVisibility,
 }) => {
   const [visible, setVisible] = useState(layerIsVisible);
-  const [opacity, setOpacity] = useState(1);
 
   const handleVisibility = useCallback(
     (_e, _obj, id) => {
@@ -47,10 +46,9 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
 
   const handleOpacity = useCallback(
     opacity => {
-      setOpacity(opacity);
       handleLayerOpacity(opacity, name);
     },
-    [name, opacity, handleLayerOpacity],
+    [name, handleLayerOpacity],
   );
 
   let legend = undefined;
