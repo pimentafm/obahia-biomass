@@ -43,15 +43,6 @@ export default createGlobalStyle`
     color: #1f5582;
   }
 
-  .ant-tooltip-inner {
-    color: fff;
-    background-color: #1f5582;
-  }
-
-  .ant-tooltip-arrow-content {
-    background-color: #1f5582f2;
-  }
-
   .ant-slider-step {
     background-color: #1f5582;
   }
