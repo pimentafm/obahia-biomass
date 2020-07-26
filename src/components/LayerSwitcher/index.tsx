@@ -120,6 +120,7 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
             min={0}
             max={1}
             step={0.1}
+            tooltipVisible={false}
             style={{ width: 40, margin: 5, marginRight: 15 }}
             onChange={handleOpacity}
           />
