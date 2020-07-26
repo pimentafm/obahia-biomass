@@ -43,14 +43,15 @@ export default createGlobalStyle`
     color: #1f5582;
   }
 
-  .ant-slider-step {
+  .ant-slider-track {
     background-color: #1f5582;
   }
-
+  .ant-slider-rail {
+    background-color: #888;
+  }
   .ant-slider-handle{
     border-color: #1f5582;
   }
-
   .ant-popover-title, .ant-popover-inner-content{
     color: #1f5582;
   }
