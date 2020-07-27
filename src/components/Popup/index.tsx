@@ -116,20 +116,20 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
           </th>
         </tr>
         <tr style={{ background: '#fff' }}>
-          <td style={{ padding: `2px 5px` }}>AGB</td>
+          <td style={{ padding: `2px 5px` }}>Biomassa acima do solo</td>
           <td id="popup-value" style={{ padding: `2px 5px` }}>
             {agb ? HtmlParser(agb) : 'Fora da camada'}
             
           </td>
         </tr>
         <tr style={{ background: '#fff' }}>
-          <td style={{ padding: `2px 5px` }}>BGB</td>
+          <td style={{ padding: `2px 5px` }}>Biomassa abaixo do solo</td>
           <td id="popup-value" style={{ padding: `2px 5px` }}>
             {bgb ? HtmlParser(bgb) : 'Fora da camada'}
           </td>
         </tr>
         <tr style={{ background: '#fff' }}>
-          <td style={{ padding: `2px 5px` }}>SOC</td>
+          <td style={{ padding: `2px 5px` }}>Estoque de carbono</td>
           <td id="popup-value" style={{ padding: `2px 5px` }}>
             {soc ? HtmlParser(soc) : 'Fora da camada'}
           </td>
