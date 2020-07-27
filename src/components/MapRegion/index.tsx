@@ -181,7 +181,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
         map={map}
       />
 
-      <Popup map={map} source={agb_source} />
+      <Popup map={map} source={[agb_source, bgb_source, soc_source]} />
 
       {/* <CardPlot year={year} /> */}
 

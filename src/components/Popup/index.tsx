@@ -10,16 +10,18 @@ import { createStringXY } from 'ol/coordinate';
 import { FiXCircle } from 'react-icons/fi';
 
 import { Container } from './styles';
+import HtmlParser from 'react-html-parser';
 
 interface PopupProps {
   map: OlMap;
-  source: TileWMS;
+  source: Array<TileWMS>;
 }
 
 const Popup: React.FC<PopupProps> = ({ map, source }) => {
   const [popcoords, setPopCoords] = useState<string>();
-  const [popclass, setPopClass] = useState<string>();
-  const [popvalue, setPopValue] = useState<string>();
+  const [agb, setAGB] = useState<string>();
+  const [bgb, setBGB] = useState<string>();
+  const [soc, setSOC] = useState<string>();
 
   const closePopUp = useCallback(() => {
     const element: HTMLElement = document.getElementById(
@@ -29,27 +31,19 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
     element.style.display = 'none';
   }, []);
 
-  const getData = useCallback((url, coordinate) => {
-    const luclasses = [
-      'Formações florestais',
-      'Formações savânicas',
-      'Formações campestres',
-      'Mosaico de agricultura ou pastagem',
-      'Agricultura de sequeiro',
-      'Agricultura irrigada',
-      'Pastagem',
-      `Corpos d'água`,
-      'Área urbana/Construções rurais',
-    ];
-
+  const getData = useCallback((url, type) => {
     fetch(url)
       .then(response => {
         return response.text();
       })
       .then(value => {
-        setPopCoords(coordinate);
-        setPopClass(luclasses[parseInt(value) - 1]);
-        setPopValue(value);
+        if (type === 'AGB'){
+          setAGB(value);
+        } else if (type === 'BGB') {
+          setBGB(value);
+        } else {
+          setSOC(value);
+        }
       });
   }, []);
 
@@ -60,12 +54,16 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
 
       const stringifyFunc = createStringXY(5);
 
-      let url = source.getFeatureInfoUrl(evt.coordinate, res, proj, {
+      let urls = source.map(source => source.getFeatureInfoUrl(evt.coordinate, res, proj, {
         INFO_FORMAT: 'text/html',
         VERSION: '1.3.0',
-      });
+      }));
 
-      getData(url, stringifyFunc(evt.coordinate));
+      getData(urls[0], 'AGB');
+      getData(urls[1], 'BGB');
+      getData(urls[2], 'SOC');
+
+      setPopCoords(stringifyFunc(evt.coordinate));
 
       const element: HTMLElement = document.getElementById(
         'popup-class',
@@ -118,15 +116,22 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
           </th>
         </tr>
         <tr style={{ background: '#fff' }}>
-          <td style={{ padding: `2px 5px` }}>Classe</td>
-          <td id="popup-lulc" style={{ padding: `2px 5px` }}>
-            {popclass ? popclass : 'Fora da camada'}
+          <td style={{ padding: `2px 5px` }}>AGB</td>
+          <td id="popup-value" style={{ padding: `2px 5px` }}>
+            {agb ? HtmlParser(agb) : 'Fora da camada'}
+            
           </td>
         </tr>
         <tr style={{ background: '#fff' }}>
-          <td style={{ padding: `2px 5px` }}>Valor</td>
+          <td style={{ padding: `2px 5px` }}>BGB</td>
           <td id="popup-value" style={{ padding: `2px 5px` }}>
-            {popvalue ? popvalue : 'Fora da camada'}
+            {bgb ? HtmlParser(bgb) : 'Fora da camada'}
+          </td>
+        </tr>
+        <tr style={{ background: '#fff' }}>
+          <td style={{ padding: `2px 5px` }}>SOC</td>
+          <td id="popup-value" style={{ padding: `2px 5px` }}>
+            {soc ? HtmlParser(soc) : 'Fora da camada'}
           </td>
         </tr>
         <tr style={{ background: '#fff' }}>
