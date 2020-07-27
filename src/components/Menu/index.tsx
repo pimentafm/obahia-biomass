@@ -268,6 +268,30 @@ const Menu: React.FC<MenuProps> = ({
         <div className="card-menu">
           <span>Séries Temporais de Dados de Biomassa</span>
         </div>
+
+        <div className="static-layers">
+          <span className="span-text">
+            <label>Descrição:</label> Esta ferramenta permite a visualização
+            customizada da série temporal de biomassa e estoque de carbono, a
+            nível regional, de bacia, de áreas de drenagem e a nível municipal.
+            Maiores informações sobre a metodologia de desenvolvimento podem ser
+            acessadas em pode ser encontradas em{' '}
+            <FaInfoCircle
+              className="text-icon"
+              style={{ fontSize: '12px', color: '#1f5582', cursor: 'pointer' }}
+              onClick={showMetadataModal}
+            />
+            . O uso dessas informações implica no aceite dos termos de uso
+            especificados em{' '}
+            <GoAlert
+              className="text-icon"
+              style={{ fontSize: '12px', color: '#1f5582', cursor: 'pointer' }}
+              onClick={showTermsOfUseModal}
+            />
+            .
+          </span>
+        </div>
+
         <label>Nível</label>
         <Select
           id="select-category"
@@ -422,13 +446,14 @@ const Menu: React.FC<MenuProps> = ({
       >
         <p style={{ textAlign: 'justify' }}>
           O usuário assume todo o risco relacionado ao uso de informações nas
-          páginas Web deste servidor. A UFV fornece essas informações "como
-          estão", e a UFV se isenta de todas e quaisquer garantias, expressas ou
-          implícitas, incluindo (mas não se limitando a) quaisquer garantias
-          implícitas de adequação a uma finalidade específica. Em nenhum caso a
-          UFV será responsável perante usuários ou terceiros por quaisquer danos
-          diretos, indiretos, incidentais, conseqüenciais, especiais ou perda de
-          lucro resultante de qualquer uso ou uso indevido desses dados.
+          páginas Web desta plataforma. A UFV fornece essas informações da
+          maneira como estão apresentadas, e a UFV se isenta de todas e
+          quaisquer garantias, expressas ou implícitas, incluindo (mas não se
+          limitando a) quaisquer garantias implícitas de adequação a uma
+          finalidade específica. Em nenhum caso a UFV será responsável perante
+          usuários ou terceiros por quaisquer danos diretos, indiretos,
+          incidentais, conseqüenciais, especiais ou perda de lucro resultante de
+          qualquer uso ou uso indevido desses dados.
         </p>
       </Modal>
 
