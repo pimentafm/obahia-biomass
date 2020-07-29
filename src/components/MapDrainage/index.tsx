@@ -46,6 +46,7 @@ const Map: React.FC<MapProps> = ({
 
   const [highways] = useState(new TileLayer({ visible: false }));
   const [hidrography] = useState(new TileLayer({ visible: false }));
+  const [flowStations] = useState(new TileLayer({ visible: true }));
 
   const [codeName, setCodeName] = useState<DrainageData>(defaultCodeName);
   const [year, setYear] = useState(defaultYear);
@@ -69,7 +70,7 @@ const Map: React.FC<MapProps> = ({
     new OlMap({
       controls: [],
       target: undefined,
-      layers: [osm, soc, bgb, agb, highways, hidrography],
+      layers: [osm, soc, bgb, agb, highways, hidrography, flowStations],
       view: view,
       interactions: defaults({
         keyboard: false,
@@ -92,6 +93,16 @@ const Map: React.FC<MapProps> = ({
     params: {
       code: codeName.code,
       LAYERS: 'hidrografia',
+      TILED: true,
+    },
+    serverType: 'mapserver',
+  });
+
+  const flowStations_source = new TileWMS({
+    url: wms.defaults.baseURL + 'estacoesFluviometricas.map',
+    params: {
+      code: codeName.code,
+      LAYERS: 'estacoes',
       TILED: true,
     },
     serverType: 'mapserver',
@@ -137,6 +148,10 @@ const Map: React.FC<MapProps> = ({
   hidrography.set('name', 'hidrography');
   hidrography.setSource(hidrography_source);
   hidrography.getSource().refresh();
+
+  flowStations.set('name', 'estacoes');
+  flowStations.setSource(flowStations_source);
+  flowStations.getSource().refresh();
 
   agb.set('name', 'agb');
   agb.setSource(agb_source);
