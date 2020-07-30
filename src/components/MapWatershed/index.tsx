@@ -193,7 +193,7 @@ const Map: React.FC<MapProps> = ({
   return (
     <Container id="map">
       <Menu
-        ishidden={false ? 1 : 0}
+        ishidden={window.innerWidth <= 760 ? 1 : 0}
         defaultCategory={defaultCategory}
         defaultWatershed={watershed}
         handleWatershed={handleWatershed}
@@ -204,7 +204,7 @@ const Map: React.FC<MapProps> = ({
 
       <Popup map={map} source={[agb_source, bgb_source, soc_source]} />
 
-      {/* <CardPlot year={year} watershed={watershed} /> */}
+      {/* <CardPlot year={year} watershed={watershed} ishidden={window.innerWidth <= 760 ? 1 : 0}/> */}
 
       <Footer id="footer" map={map} />
     </Container>

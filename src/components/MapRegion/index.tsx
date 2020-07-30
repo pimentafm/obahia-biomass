@@ -175,7 +175,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   return (
     <Container id="map">
       <Menu
-        ishidden={false ? 1 : 0}
+        ishidden={window.innerWidth <= 760 ? 1 : 0}
         defaultCategory={defaultCategory}
         defaultYear={year}
         handleYear={handleYear}
@@ -184,7 +184,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
 
       <Popup map={map} source={[agb_source, bgb_source, soc_source]} />
 
-      {/* <CardPlot year={year} /> */}
+      {/* <CardPlot year={year} ishidden={window.innerWidth <= 760 ? 1 : 0}/> */}
 
       <Footer id="footer" map={map} />
     </Container>
