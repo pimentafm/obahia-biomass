@@ -228,7 +228,7 @@ const Menu: React.FC<MenuProps> = ({
         break;
       case 'Área de drenagem':
         setDownloadURL(
-          `ftp://obahia.dea.ufv.br/biomass/drainage/${defaultYear}/AGB_${defaultCodeName?.code}.tif`,
+          `ftp://obahia.dea.ufv.br/biomass/drainage/${defaultCodeName?.code}/AGB_${defaultCodeName?.code}.tif`,
         );
         break;
       case 'Municipal':
