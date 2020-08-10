@@ -39,9 +39,15 @@ const Map: React.FC<MapProps> = ({
   defaultCategory,
   defaultWatershed,
 }) => {
-  const [agb] = useState(new TileLayer({ visible: true }));
-  const [bgb] = useState(new TileLayer({ visible: false }));
-  const [soc] = useState(new TileLayer({ visible: false }));
+  const [agb] = useState(
+    new TileLayer({ visible: true, className: 'biomass-layer' }),
+  );
+  const [bgb] = useState(
+    new TileLayer({ visible: false, className: 'biomass-layer' }),
+  );
+  const [soc] = useState(
+    new TileLayer({ visible: false, className: 'biomass-layer' }),
+  );
 
   const [highways] = useState(new TileLayer({ visible: false }));
   const [hidrography] = useState(new TileLayer({ visible: false }));
@@ -62,7 +68,7 @@ const Map: React.FC<MapProps> = ({
     }),
   );
 
-  const osm = new TileLayer({ source: new OSM() });
+  const osm = new TileLayer({ source: new OSM({ crossOrigin: 'anonymous' }) });
 
   const [map] = useState(
     new OlMap({
@@ -84,6 +90,7 @@ const Map: React.FC<MapProps> = ({
       TILED: true,
     },
     serverType: 'mapserver',
+    crossOrigin: 'anonymous',
   });
 
   const hidrography_source = new TileWMS({
@@ -94,6 +101,7 @@ const Map: React.FC<MapProps> = ({
       TILED: true,
     },
     serverType: 'mapserver',
+    crossOrigin: 'anonymous',
   });
 
   const agb_source = new TileWMS({
@@ -105,6 +113,7 @@ const Map: React.FC<MapProps> = ({
       TILED: true,
     },
     serverType: 'mapserver',
+    crossOrigin: 'anonymous',
   });
 
   const bgb_source = new TileWMS({
@@ -116,6 +125,7 @@ const Map: React.FC<MapProps> = ({
       TILED: true,
     },
     serverType: 'mapserver',
+    crossOrigin: 'anonymous',
   });
 
   const soc_source = new TileWMS({
@@ -127,6 +137,7 @@ const Map: React.FC<MapProps> = ({
       TILED: true,
     },
     serverType: 'mapserver',
+    crossOrigin: 'anonymous',
   });
 
   highways.set('name', 'highways');
