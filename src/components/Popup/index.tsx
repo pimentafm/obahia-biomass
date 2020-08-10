@@ -37,7 +37,7 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
         return response.text();
       })
       .then(value => {
-        if (type === 'AGB'){
+        if (type === 'AGB') {
           setAGB(value);
         } else if (type === 'BGB') {
           setBGB(value);
@@ -48,16 +48,34 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
   }, []);
 
   useEffect(() => {
+    map.on('pointermove', function (evt) {
+      if (evt.dragging) {
+        return;
+      }
+
+      let hit = map.forEachLayerAtPixel(
+        evt.pixel,
+        (_, rgba) => {
+          return true;
+        },
+        { layerFilter: layer => layer.getClassName() !== 'ol-layer' },
+      );
+
+      map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+    });
+
     map.on('singleclick', evt => {
       let res = map.getView().getResolution();
       let proj = map.getView().getProjection();
 
       const stringifyFunc = createStringXY(5);
 
-      let urls = source.map(source => source.getFeatureInfoUrl(evt.coordinate, res, proj, {
-        INFO_FORMAT: 'text/html',
-        VERSION: '1.3.0',
-      }));
+      let urls = source.map(source =>
+        source.getFeatureInfoUrl(evt.coordinate, res, proj, {
+          INFO_FORMAT: 'text/html',
+          VERSION: '1.3.0',
+        }),
+      );
 
       getData(urls[0], 'AGB');
       getData(urls[1], 'BGB');
@@ -119,7 +137,6 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
           <td style={{ padding: `2px 5px` }}>Biomassa acima do solo</td>
           <td id="popup-value" style={{ padding: `2px 5px` }}>
             {agb ? HtmlParser(agb) : 'Fora da camada'}
-            
           </td>
         </tr>
         <tr style={{ background: '#fff' }}>
