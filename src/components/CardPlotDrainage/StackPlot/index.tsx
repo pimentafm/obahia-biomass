@@ -9,11 +9,11 @@ interface StackPlotData {
 }
 
 interface StackPlotProps {
-  watershed: string;
+  code: number;
   tableName: string;
 }
 
-const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
+const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
   const [agb, setAGB] = useState(null);
   const [bgb, setBGB] = useState(null);
   const [soc, setSOC] = useState(null);
@@ -28,7 +28,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
         year1: 1990,
         year2: 2018,
         bt: 'AGB',
-        gcc: watershed,
+        code: code,
         table_name: tableName,
         headers: {
           'Content-type': 'application/json',
@@ -49,8 +49,8 @@ const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
       .post('biomassdrain/', {
         year1: 1990,
         year2: 2018,
-        bt: 'AGB',
-        gcc: watershed,
+        bt: 'BGB',
+        code: code,
         table_name: tableName,
         headers: {
           'Content-type': 'application/json',
@@ -72,7 +72,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
         year1: 1990,
         year2: 2018,
         bt: 'SOC',
-        gcc: watershed,
+        code: code,
         table_name: tableName,
         headers: {
           'Content-type': 'application/json',
@@ -88,7 +88,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
       .catch(e => {
         throw new Error('Do not load StackPlot data');
       });
-  }, [watershed, tableName]);
+  }, [code, tableName]);
 
   const data = [
     {
@@ -107,7 +107,6 @@ const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
       stackgroup: 'one',
       fillcolor: '#FD984D',
       type: 'scatter',
-      //text: Array(29).fill('Formações savânicas'),
       hovertemplate: '%{y:.5f} tCha<sup>-1</sup><extra></extra>',
       line: { color: '#FD984D' },
     },
@@ -117,14 +116,12 @@ const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
       stackgroup: 'one',
       fillcolor: '#AFCE58',
       type: 'scatter',
-      //text: Array(29).fill('Formações florestais'),
       hovertemplate: '%{y:.5f} tCha<sup>-1</sup><extra></extra>',
       line: { color: '#AFCE58' },
     },
   ];
   const layout = {
     title: {
-      //text: '<b>Cobertura e uso do solo (1990 - 2018)</b>',
       font: {
         family: 'Arial, sans-serif',
         size: 14,
@@ -152,7 +149,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
     },
     yaxis: {
       title: {
-        text: 'Uso e Cobertura do solo (1000 km²)',
+        text: 'tCha<sup>-1</sup>',
       },
       titlefont: {
         family: 'Arial, sans-serif',
@@ -164,11 +161,10 @@ const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
         size: 12,
         color: 'black',
       },
-
       autotick: false,
       ticks: 'outside',
       tick0: 0,
-      dtick: 200,
+      dtick: 100,
       ticklen: 6,
       tickwidth: 1,
       tickcolor: '#000',
