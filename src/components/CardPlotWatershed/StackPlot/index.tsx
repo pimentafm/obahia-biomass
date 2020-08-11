@@ -152,7 +152,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
     },
     yaxis: {
       title: {
-        text: 'Uso e Cobertura do solo (1000 km²)',
+        text: 'tCha<sup>-1</sup>',
       },
       titlefont: {
         family: 'Arial, sans-serif',
@@ -168,7 +168,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
       autotick: false,
       ticks: 'outside',
       tick0: 0,
-      dtick: 200,
+      dtick: 2000,
       ticklen: 6,
       tickwidth: 1,
       tickcolor: '#000',
