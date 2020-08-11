@@ -24,7 +24,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
 
   useEffect(() => {
     oba
-      .post('biomassdrain/', {
+      .post('biomassgcc/', {
         year1: 1990,
         year2: 2018,
         bt: 'AGB',
@@ -46,10 +46,10 @@ const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
       });
 
     oba
-      .post('biomassdrain/', {
+      .post('biomassgcc/', {
         year1: 1990,
         year2: 2018,
-        bt: 'AGB',
+        bt: 'BGB',
         gcc: watershed,
         table_name: tableName,
         headers: {
@@ -68,7 +68,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
       });
 
     oba
-      .post('biomassdrain/', {
+      .post('biomassgcc/', {
         year1: 1990,
         year2: 2018,
         bt: 'SOC',

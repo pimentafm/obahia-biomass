@@ -274,7 +274,7 @@ const Menu: React.FC<MenuProps> = ({
             <label>Descrição:</label> Esta ferramenta permite a visualização
             customizada da série temporal de biomassa e estoque de carbono, a
             nível regional, de bacia, de áreas de drenagem e a nível municipal.
-            Maiores informações sobre os dados de biomassa e estoque de carbono 
+            Maiores informações sobre os dados de biomassa e estoque de carbono
             no solo podem ser acessadas em{' '}
             <FaInfoCircle
               className="text-icon"
