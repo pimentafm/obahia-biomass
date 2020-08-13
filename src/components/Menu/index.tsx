@@ -15,6 +15,8 @@ import { FiMenu } from 'react-icons/fi';
 import { FaInfoCircle } from 'react-icons/fa';
 import { GoAlert } from 'react-icons/go';
 
+import ChangeLanguage from './ChangeLanguage';
+
 import ToolsMenu from './ToolsMenu';
 import ZoomControl from './ZoomControl';
 import Scalebar from './ScaleBar';
@@ -23,6 +25,8 @@ import StaticLayerSwitcher from '../StaticLayerSwitcher';
 import LayerSwitcher from '../LayerSwitcher';
 
 import { Container, Header, Footer, Content } from './styles';
+
+import { useTranslation } from 'react-i18next';
 
 interface CodeNameData {
   code: number;
@@ -55,6 +59,9 @@ const Menu: React.FC<MenuProps> = ({
   map,
   ...rest
 }) => {
+  const { t } = useTranslation();
+  document.title = t('appname');
+
   const [hidden, setHidden] = useState(ishidden);
   const [termsOfUseModal, setTermsOfUseModal] = useState<boolean>(false);
   const [metadataModal, setMetadataModal] = useState<boolean>(false);
@@ -68,18 +75,22 @@ const Menu: React.FC<MenuProps> = ({
   const [downloadURL, setDownloadURL] = useState('');
 
   const termsOfUse = HtmlParser(
-    `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> Serie Temporal de Carbono no Solo - Termos de uso</span>`,
+    `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> ${t(
+      'modal_terms_title',
+    )}</span>`,
   );
 
   const additionalInformation = HtmlParser(
-    `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> Serie Temporal de Carbono no Solo - Informações adicionais</span>`,
+    `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> ${t(
+      'modal_info_title',
+    )}</span>`,
   );
 
-  const [categories] = useState([
-    ['Regional', '/'],
-    ['Bacia hidrográfica', 'gcc'],
-    ['Área de drenagem', 'drainage'],
-    ['Municipal', 'counties'],
+  const [categories, setCategories] = useState([
+    [t('select_region'), '/'],
+    [t('select_watershed'), 'gcc'],
+    [t('select_drainage'), 'drainage'],
+    [t('select_municipal'), 'counties'],
   ]);
 
   const [years] = useState(
@@ -146,8 +157,8 @@ const Menu: React.FC<MenuProps> = ({
   let watershedsLabel = null;
   let watershedSelect = null;
 
-  if (defaultCategory === 'Bacia hidrográfica') {
-    watershedsLabel = <label>Nome</label>;
+  if (defaultCategory === t('select_watershed')) {
+    watershedsLabel = <label>{t('label_name')}</label>;
     watershedSelect = (
       <Select
         id="select"
@@ -170,10 +181,10 @@ const Menu: React.FC<MenuProps> = ({
   let codeNameSelect = null;
 
   if (
-    defaultCategory === 'Área de drenagem' ||
-    defaultCategory === 'Municipal'
+    defaultCategory === t('select_drainage') ||
+    defaultCategory === t('select_municipal')
   ) {
-    codeNameLabel = <label>Nome</label>;
+    codeNameLabel = <label>{t('label_name')}</label>;
     codeNameSelect = (
       <Select
         id="select"
@@ -194,7 +205,7 @@ const Menu: React.FC<MenuProps> = ({
   useEffect(() => {
     oba
       .post('geom/', {
-        table_name: defaultCategory === 'Municipal' ? 'counties' : 'drainage',
+        table_name: defaultCategory === t('select_municipal') ? 'counties' : 'drainage',
         headers: {
           'Content-type': 'application/json',
         },
@@ -210,7 +221,6 @@ const Menu: React.FC<MenuProps> = ({
         );
 
         setCodenames(codenames);
-        console.log(codenames);
       })
       .catch(e => {
         throw new Error('Do not load codenames');
@@ -238,10 +248,18 @@ const Menu: React.FC<MenuProps> = ({
         );
         break;
     }
-  }, [defaultYear, defaultCategory, defaultWatershed, defaultCodeName]);
+
+    setCategories([
+      [t('select_region'), '/'], 
+      [t('select_watershed'), 'gcc'], 
+      [t('select_drainage'), 'drainage'], 
+      [t('select_municipal'), 'counties'],
+    ]);
+  }, [defaultYear, defaultCategory, defaultWatershed, defaultCodeName, t]);
 
   return (
     <Container id="menu" ishidden={hidden}>
+      <ChangeLanguage ishidden={hidden} />
       <ToolsMenu ishidden={hidden} />
       <ZoomControl ishidden={hidden} map={map} />
       <Scalebar id="scalebar" map={map} />
@@ -254,7 +272,7 @@ const Menu: React.FC<MenuProps> = ({
           />
         </a>
 
-        <Popover placement="right" content="Esconde/Mostra menu">
+        <Popover placement="right" content={t('tooltip_menu')}>
           <FiMenu
             id="handleMenu"
             type="menu"
@@ -267,23 +285,18 @@ const Menu: React.FC<MenuProps> = ({
 
       <Content>
         <div className="card-menu">
-          <span>Séries Temporais de Dados de Biomassa</span>
+          <span>{t('appname')}</span>
         </div>
 
         <div className="static-layers">
           <span className="span-text">
-            <label>Descrição:</label> Esta ferramenta permite a visualização
-            customizada da série temporal de biomassa e estoque de carbono, a
-            nível regional, de bacia, de áreas de drenagem e a nível municipal.
-            Maiores informações sobre os dados de biomassa e estoque de carbono
-            no solo podem ser acessadas em{' '}
+            <label>{t('description_title')}</label> {t('description_content')}{' '}
             <FaInfoCircle
               className="text-icon"
               style={{ fontSize: '12px', color: '#1f5582', cursor: 'pointer' }}
               onClick={showMetadataModal}
             />
-            . O uso dessas informações implica no aceite dos termos de uso
-            especificados em{' '}
+            . {t('description_terms')}{' '}
             <GoAlert
               className="text-icon"
               style={{ fontSize: '12px', color: '#1f5582', cursor: 'pointer' }}
@@ -293,7 +306,7 @@ const Menu: React.FC<MenuProps> = ({
           </span>
         </div>
 
-        <label>Nível</label>
+        <label>{t('label_level')}</label>
         <Select
           id="select-category"
           defaultValue={category}
@@ -312,7 +325,7 @@ const Menu: React.FC<MenuProps> = ({
         {codeNameLabel}
         {codeNameSelect}
 
-        <label>Ano</label>
+        <label>{t('label_year')}</label>
         <Select
           id="select-year"
           defaultValue={defaultYear}
@@ -328,7 +341,7 @@ const Menu: React.FC<MenuProps> = ({
 
         <LayerSwitcher
           name="agb"
-          label="Biomassa acima do solo"
+          label={t('label_agb')}
           handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
           layerIsVisible={true}
@@ -340,7 +353,7 @@ const Menu: React.FC<MenuProps> = ({
 
         <LayerSwitcher
           name="bgb"
-          label="Biomassa abaixo do solo"
+          label={t('label_bgb')}
           handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
           layerIsVisible={false}
@@ -352,7 +365,7 @@ const Menu: React.FC<MenuProps> = ({
 
         <LayerSwitcher
           name="soc"
-          label="Estoque de carbono"
+          label={t('label_soc')}
           handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
           layerIsVisible={false}
@@ -365,7 +378,7 @@ const Menu: React.FC<MenuProps> = ({
         <div className="static-layers">
           <StaticLayerSwitcher
             name="hidrography"
-            label="Hidrografia"
+            label={t('label_hidrography')}
             handleLayerVisibility={handleLayerVisibility}
             layerIsVisible={false}
             legendIsVisible={false}
@@ -374,7 +387,7 @@ const Menu: React.FC<MenuProps> = ({
           />
           <StaticLayerSwitcher
             name="highways"
-            label="Rodovias"
+            label={t('label_highways')}
             handleLayerVisibility={handleLayerVisibility}
             layerIsVisible={false}
             legendIsVisible={false}
@@ -386,7 +399,7 @@ const Menu: React.FC<MenuProps> = ({
             <>
               <StaticLayerSwitcher
                 name="watersheds"
-                label="Bacias hidrográficas"
+                label={t('label_watersheds')}
                 handleLayerVisibility={handleLayerVisibility}
                 layerIsVisible={true}
                 legendIsVisible={false}
@@ -395,7 +408,7 @@ const Menu: React.FC<MenuProps> = ({
               />
               <StaticLayerSwitcher
                 name="counties"
-                label="Municípios"
+                label={t('label_municipalities')}
                 handleLayerVisibility={handleLayerVisibility}
                 layerIsVisible={false}
                 legendIsVisible={false}
@@ -409,14 +422,14 @@ const Menu: React.FC<MenuProps> = ({
       </Content>
 
       <Footer ishidden={hidden}>
-        <Popover placement="right" content="Termos de uso">
+        <Popover placement="right" content={t('tooltip_terms')}>
           <GoAlert
             className="footer_icon"
             style={{ fontSize: '20px', color: '#fff', cursor: 'pointer' }}
             onClick={showTermsOfUseModal}
           />
         </Popover>
-        <Popover placement="right" content="Informações adicionais">
+        <Popover placement="right" content={t('tooltip_info')}>
           <FaInfoCircle
             className="footer_icon"
             style={{ fontSize: '20px', color: '#fff', cursor: 'pointer' }}
@@ -446,15 +459,7 @@ const Menu: React.FC<MenuProps> = ({
         ]}
       >
         <p style={{ textAlign: 'justify' }}>
-          O usuário assume todo o risco relacionado ao uso de informações nas
-          páginas Web desta plataforma. A UFV fornece essas informações da
-          maneira como estão apresentadas, e a UFV se isenta de todas e
-          quaisquer garantias, expressas ou implícitas, incluindo (mas não se
-          limitando a) quaisquer garantias implícitas de adequação a uma
-          finalidade específica. Em nenhum caso a UFV será responsável perante
-          usuários ou terceiros por quaisquer danos diretos, indiretos,
-          incidentais, conseqüenciais, especiais ou perda de lucro resultante de
-          qualquer uso ou uso indevido desses dados.
+        {t('terms_of_use')}
         </p>
       </Modal>
 
@@ -479,18 +484,13 @@ const Menu: React.FC<MenuProps> = ({
           </Button>,
         ]}
       >
-        <p style={{ textAlign: 'justify' }}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem labore
-          omnis iusto officia eligendi minima corrupti culpa dolorum nesciunt?
-          Accusantium repellat, nulla est tenetur labore nihil quae minus
-          corrupti assumenda!
-        </p>
-        <p style={{ textAlign: 'justify' }}>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          Necessitatibus culpa voluptatibus illo aspernatur porro ex quidem id
-          in vel praesentium, dignissimos eligendi dolorum eum reprehenderit
-          fugiat autem neque corrupti maxime.
-        </p>
+        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph01')}</p>
+        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph02')}</p>
+        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph03')}</p>
+        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph04')}</p>
+        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph05')}</p>
+        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph06')}</p>
+        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph07')}</p>
       </Modal>
     </Container>
   );
