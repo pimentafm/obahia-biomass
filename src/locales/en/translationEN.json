@@ -9,7 +9,7 @@
   "select_region": "Regional",
   "select_watershed": "Watershed",
   "select_drainage": "Drainage area",
-  "select_municipal": "Municipalities",
+  "select_municipal": "Municipal",
   "label_agb": "Aboveground biomass",
   "label_bgb": "Belowground biomass",
   "label_soc": "Soil carbon stock",

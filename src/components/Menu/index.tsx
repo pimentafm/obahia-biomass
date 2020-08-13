@@ -255,6 +255,7 @@ const Menu: React.FC<MenuProps> = ({
       [t('select_drainage'), 'drainage'], 
       [t('select_municipal'), 'counties'],
     ]);
+
   }, [defaultYear, defaultCategory, defaultWatershed, defaultCodeName, t]);
 
   return (
