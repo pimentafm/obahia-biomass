@@ -11,7 +11,7 @@ const Watershed: React.FC = () => {
     <Map
       defaultYear={2018}
       defaultCategory={t('select_watershed')}
-      defaultWatershed="grande"
+      defaultWatershed="Grande"
     />
   );
 };

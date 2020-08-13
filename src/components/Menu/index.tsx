@@ -70,7 +70,7 @@ const Menu: React.FC<MenuProps> = ({
   const [category, setCategory] = useState(defaultCategory);
 
   const [codenames, setCodenames] = useState([]);
-  const [watersheds_list] = useState(['grande', 'corrente', 'carinhanha']);
+  const [watersheds_list] = useState(['Grande', 'Corrente', 'Carinhanha']);
 
   const [downloadURL, setDownloadURL] = useState('');
 
@@ -234,7 +234,7 @@ const Menu: React.FC<MenuProps> = ({
         break;
       case 'Bacia hidrográfica':
         setDownloadURL(
-          `ftp://obahia.dea.ufv.br/biomass/gcc/${defaultWatershed}/AGB${defaultYear}.tif`,
+          `ftp://obahia.dea.ufv.br/biomass/gcc/${defaultWatershed?.toLowerCase()}/AGB${defaultYear}.tif`,
         );
         break;
       case 'Área de drenagem':

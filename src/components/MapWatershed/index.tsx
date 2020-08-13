@@ -86,7 +86,7 @@ const Map: React.FC<MapProps> = ({
     url: wms.defaults.baseURL + 'highwaysWatersheds.map',
     params: {
       LAYERS: 'Rodovias',
-      ws: watershed,
+      ws: watershed.toLowerCase(),
       TILED: true,
     },
     serverType: 'mapserver',
@@ -96,7 +96,7 @@ const Map: React.FC<MapProps> = ({
   const hidrography_source = new TileWMS({
     url: wms.defaults.baseURL + 'hidrographyWatersheds.map',
     params: {
-      ws: watershed,
+      ws: watershed.toLowerCase(),
       LAYERS: 'hidrografia',
       TILED: true,
     },
@@ -108,7 +108,7 @@ const Map: React.FC<MapProps> = ({
     url: wms.defaults.baseURL + 'agbWatersheds.map',
     params: {
       year: year,
-      ws: watershed,
+      ws: watershed.toLowerCase(),
       LAYERS: 'agb',
       TILED: true,
     },
@@ -120,7 +120,7 @@ const Map: React.FC<MapProps> = ({
     url: wms.defaults.baseURL + 'bgbWatersheds.map',
     params: {
       year: year,
-      ws: watershed,
+      ws: watershed.toLowerCase(),
       LAYERS: 'bgb',
       TILED: true,
     },
@@ -132,7 +132,7 @@ const Map: React.FC<MapProps> = ({
     url: wms.defaults.baseURL + 'socWatersheds.map',
     params: {
       year: year,
-      ws: watershed,
+      ws: watershed.toLowerCase(),
       LAYERS: 'soc',
       TILED: true,
     },
@@ -217,7 +217,7 @@ const Map: React.FC<MapProps> = ({
 
       <CardPlot
         year={year}
-        watershed={watershed}
+        watershed={watershed.toLowerCase()}
         ishidden={window.innerWidth <= 760 ? 1 : 0}
       />
 
