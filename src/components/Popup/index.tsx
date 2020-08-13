@@ -12,12 +12,16 @@ import { FiXCircle } from 'react-icons/fi';
 import { Container } from './styles';
 import HtmlParser from 'react-html-parser';
 
+import { useTranslation } from 'react-i18next';
+
 interface PopupProps {
   map: OlMap;
   source: Array<TileWMS>;
 }
 
 const Popup: React.FC<PopupProps> = ({ map, source }) => {
+  const { t } = useTranslation();
+
   const [popcoords, setPopCoords] = useState<string>();
   const [agb, setAGB] = useState<string>();
   const [bgb, setBGB] = useState<string>();
@@ -134,19 +138,19 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
           </th>
         </tr>
         <tr style={{ background: '#fff' }}>
-          <td style={{ padding: `2px 5px` }}>Biomassa acima do solo</td>
+            <td style={{ padding: `2px 5px` }}>{t('label_agb')}</td>
           <td id="popup-value" style={{ padding: `2px 5px` }}>
             {agb ? HtmlParser(agb) : 'Fora da camada'}
           </td>
         </tr>
         <tr style={{ background: '#fff' }}>
-          <td style={{ padding: `2px 5px` }}>Biomassa abaixo do solo</td>
+          <td style={{ padding: `2px 5px` }}>{t('label_bgb')}</td>
           <td id="popup-value" style={{ padding: `2px 5px` }}>
             {bgb ? HtmlParser(bgb) : 'Fora da camada'}
           </td>
         </tr>
         <tr style={{ background: '#fff' }}>
-          <td style={{ padding: `2px 5px` }}>Estoque de carbono</td>
+          <td style={{ padding: `2px 5px` }}>{t('label_soc')}</td>
           <td id="popup-value" style={{ padding: `2px 5px` }}>
             {soc ? HtmlParser(soc) : 'Fora da camada'}
           </td>
@@ -159,7 +163,7 @@ const Popup: React.FC<PopupProps> = ({ map, source }) => {
             id="popup-coords"
             style={{ padding: `2px 5px`, borderRadius: `0px 0px 2px 0px` }}
           >
-            {popcoords ? popcoords : 'Clique no mapa'}
+            {popcoords ? popcoords : t('popup_clickout')}
           </td>
         </tr>
       </tbody>
