@@ -9,6 +9,8 @@ import { Container, Content } from './styles';
 import Barplot from './Barplot';
 import StackPlot from './StackPlot';
 
+import { useTranslation } from 'react-i18next';
+
 interface CardProps {
   ishidden: number;
   year: number;
@@ -16,6 +18,8 @@ interface CardProps {
 }
 
 const CardPlot: React.FC<CardProps> = ({ year, watershed, ishidden }) => {
+  const { t } = useTranslation();
+
   const [hidden, setHidden] = useState(ishidden);
 
   const handleCardPlot = useCallback(() => {
@@ -39,10 +43,10 @@ const CardPlot: React.FC<CardProps> = ({ year, watershed, ishidden }) => {
       </div>
 
       <Content>
-        <label>Biomassa (1990 - 2018)</label>
+        <label>{t('stackplot_title')}</label>
         <StackPlot watershed={watershed} tableName="biomass" />
 
-        <label>Biomassa {year}</label>
+        <label>{t('barplot_title')}</label>
         <Barplot year={year} watershed={watershed} tableName="biomass" />
         <div className="final-space"></div>
       </Content>

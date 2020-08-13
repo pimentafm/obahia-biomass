@@ -3,6 +3,8 @@ import PlotlyChart from 'react-plotlyjs-ts';
 
 import { oba } from '../../../services';
 
+import { useTranslation } from 'react-i18next';
+
 interface BarPlotData {
   data: Object;
 }
@@ -18,16 +20,18 @@ interface BarplotProps {
 }
 
 const Barplot: React.FC<BarplotProps> = ({ year, tableName }) => {
+  const { t } = useTranslation();
+
   const [agb, setAGB] = useState<number>();
   const [bgb, setBGB] = useState<number>();
   const [soc, setSOC] = useState<number>();
 
   const [colors] = useState(['#AFCE58', '#FD984D', '#A58250']);
 
-  const [xaxis] = useState([
-    'Biomassa acima do solo',
-    'Biomassa abaixo do solo',
-    'Estoque de carbono',
+  const [xaxis, setXAxis] = useState([
+    t('label_agb'),
+    t('label_bgb'),
+    t('label_soc'),
   ]);
 
   useEffect(() => {
@@ -93,7 +97,9 @@ const Barplot: React.FC<BarplotProps> = ({ year, tableName }) => {
       .catch(e => {
         throw new Error('Do not load Barplot data');
       });
-  }, [year, tableName]);
+
+      setXAxis([t('label_agb'), t('label_bgb'), t('label_soc')]);
+  }, [year, tableName, t]);
 
   const data = [
     {
