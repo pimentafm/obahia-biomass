@@ -33,7 +33,7 @@ const CardPlot: React.FC<CardProps> = ({ year, code, ishidden }) => {
   return (
     <Container id="cardplot" ishidden={hidden}>
       <div id="handleCardplot">
-        <Popover placement="leftTop" content="Esconde/Mostra gráficos">
+        <Popover placement="leftTop" content={t('tooltip_menu_plot')}>
           <FiMenu
             type="menu"
             style={{ fontSize: '20px', color: '#000' }}

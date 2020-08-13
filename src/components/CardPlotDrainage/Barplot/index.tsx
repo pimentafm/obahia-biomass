@@ -99,7 +99,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, code, tableName }) => {
       });
       
       setXAxis([t('label_agb'), t('label_bgb'), t('label_soc')]);
-  }, [year, code, tableName]);
+  }, [year, code, tableName, t]);
 
   const data = [
     {
