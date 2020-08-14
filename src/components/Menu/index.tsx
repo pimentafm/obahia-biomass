@@ -87,7 +87,7 @@ const Menu: React.FC<MenuProps> = ({
   );
 
   const [categories, setCategories] = useState([
-    [t('select_region'), '/'],
+    [t('select_region'), 'regional'],
     [t('select_watershed'), 'gcc'],
     [t('select_drainage'), 'drainage'],
     [t('select_municipal'), 'counties'],
@@ -225,7 +225,7 @@ const Menu: React.FC<MenuProps> = ({
       });
 
     switch (category) {
-      case 'region':
+      case 'regional':
         setDownloadURL(
           `ftp://obahia.dea.ufv.br/biomass/region/AGB${defaultYear}.tif`,
         );
