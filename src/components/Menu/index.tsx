@@ -94,7 +94,7 @@ const Menu: React.FC<MenuProps> = ({
   ]);
 
   const [years] = useState(
-    Array.from(new Array(29), (val, index) => index + 1990),
+    Array.from(new Array(29), (_, index) => index + 1990),
   );
 
   const showTermsOfUseModal = () => {
@@ -205,7 +205,8 @@ const Menu: React.FC<MenuProps> = ({
   useEffect(() => {
     oba
       .post('geom/', {
-        table_name: defaultCategory === t('select_municipal') ? 'counties' : 'drainage',
+        table_name:
+          defaultCategory === t('select_municipal') ? 'counties' : 'drainage',
         headers: {
           'Content-type': 'application/json',
         },
@@ -226,23 +227,23 @@ const Menu: React.FC<MenuProps> = ({
         throw new Error('Do not load codenames');
       });
 
-    switch (defaultCategory) {
-      case 'Regional':
+    switch (category) {
+      case 'region':
         setDownloadURL(
           `ftp://obahia.dea.ufv.br/biomass/region/AGB${defaultYear}.tif`,
         );
         break;
-      case 'Bacia hidrográfica':
+      case 'gcc':
         setDownloadURL(
           `ftp://obahia.dea.ufv.br/biomass/gcc/${defaultWatershed?.toLowerCase()}/AGB${defaultYear}.tif`,
         );
         break;
-      case 'Área de drenagem':
+      case 'drainage':
         setDownloadURL(
           `ftp://obahia.dea.ufv.br/biomass/drainage/${defaultCodeName?.code}/AGB_${defaultCodeName?.code}.tif`,
         );
         break;
-      case 'Municipal':
+      case 'counties':
         setDownloadURL(
           `ftp://obahia.dea.ufv.br/biomass/cities/AGB_${defaultCodeName?.code}_${defaultYear}.tif`,
         );
@@ -250,13 +251,19 @@ const Menu: React.FC<MenuProps> = ({
     }
 
     setCategories([
-      [t('select_region'), '/'], 
-      [t('select_watershed'), 'gcc'], 
-      [t('select_drainage'), 'drainage'], 
+      [t('select_region'), '/'],
+      [t('select_watershed'), 'gcc'],
+      [t('select_drainage'), 'drainage'],
       [t('select_municipal'), 'counties'],
     ]);
-
-  }, [defaultYear, defaultCategory, defaultWatershed, defaultCodeName, t]);
+  }, [
+    category,
+    defaultYear,
+    defaultCategory,
+    defaultWatershed,
+    defaultCodeName,
+    t,
+  ]);
 
   return (
     <Container id="menu" ishidden={hidden}>
@@ -459,9 +466,7 @@ const Menu: React.FC<MenuProps> = ({
           </Button>,
         ]}
       >
-        <p style={{ textAlign: 'justify' }}>
-        {t('terms_of_use')}
-        </p>
+        <p style={{ textAlign: 'justify' }}>{t('terms_of_use')}</p>
       </Modal>
 
       <Modal
