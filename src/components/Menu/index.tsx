@@ -157,7 +157,7 @@ const Menu: React.FC<MenuProps> = ({
   let watershedsLabel = null;
   let watershedSelect = null;
 
-  if (defaultCategory === t('select_watershed')) {
+  if (category === 'gcc') {
     watershedsLabel = <label>{t('label_name')}</label>;
     watershedSelect = (
       <Select
@@ -180,10 +180,7 @@ const Menu: React.FC<MenuProps> = ({
   let codeNameLabel = null;
   let codeNameSelect = null;
 
-  if (
-    defaultCategory === t('select_drainage') ||
-    defaultCategory === t('select_municipal')
-  ) {
+  if (category === 'drainage' || category === 'counties') {
     codeNameLabel = <label>{t('label_name')}</label>;
     codeNameSelect = (
       <Select
@@ -240,7 +237,7 @@ const Menu: React.FC<MenuProps> = ({
         break;
       case 'drainage':
         setDownloadURL(
-          `ftp://obahia.dea.ufv.br/biomass/drainage/${defaultCodeName?.code}/AGB_${defaultCodeName?.code}.tif`,
+          `ftp://obahia.dea.ufv.br/biomass/drainage/${defaultCodeName?.code}/AGB_${defaultCodeName?.code}_${defaultYear}.tif`,
         );
         break;
       case 'counties':
