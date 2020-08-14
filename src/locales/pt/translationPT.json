@@ -43,5 +43,6 @@
   "modal_info_paraghaph07": "Dionizio, E.A.D, 2019. The effect of land use change on soil physical properties and on carbon stocks on sandy soils of a Cerrado agricultural frontier. Tese de Doutorado, Universidade Federal de Viçosa, março 2019. Orientador: Marcos Heil Costa",
   "popup_clickout": "Fora da camada",
   "stackplot_title": "Estoques de carbono (1990 -2018)",
-  "barplot_title": "Estoques de carbono"
+  "barplot_title": "Estoques de carbono",
+  "label_plot_xaxis": "Tipo"
 }

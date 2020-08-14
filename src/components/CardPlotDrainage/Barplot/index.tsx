@@ -122,7 +122,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, code, tableName }) => {
     height: 300,
     xaxis: {
       title: {
-        text: 'Classes',
+        text: t('label_plot_xaxis'),
       },
       titlefont: {
         family: 'Arial, sans-serif',
