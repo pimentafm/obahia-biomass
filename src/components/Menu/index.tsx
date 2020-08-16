@@ -200,10 +200,10 @@ const Menu: React.FC<MenuProps> = ({
   }
 
   useEffect(() => {
+    console.log(category, defaultCategory, t('select_municipal'));
     oba
       .post('geom/', {
-        table_name:
-          defaultCategory === t('select_municipal') ? 'counties' : 'drainage',
+        table_name: defaultCategory === 'counties' ? 'counties' : 'drainage',
         headers: {
           'Content-type': 'application/json',
         },
