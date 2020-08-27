@@ -74,6 +74,10 @@ const Menu: React.FC<MenuProps> = ({
 
   const [downloadURL, setDownloadURL] = useState('');
 
+  const [agbVisible, setAGBVisible] = useState(true);
+  const [bgbVisible, setBGBVisible] = useState(false);
+  const [socVisible, setSOCVisible] = useState(false);
+
   const termsOfUse = HtmlParser(
     `<span style="color: #1f5582; font-weight: 600; font-size: 16px;">OBahia</span><span> ${t(
       'modal_terms_title',
@@ -135,11 +139,34 @@ const Menu: React.FC<MenuProps> = ({
     (e, id) => {
       const lyr_name = id; //obj.target.name;
 
+      if (lyr_name === 'agb') {
+        setAGBVisible(e);
+        setBGBVisible(!e);
+        setSOCVisible(!e);
+      }
+
+      if (lyr_name === 'bgb') {
+        setAGBVisible(!e);
+        setBGBVisible(e);
+        setSOCVisible(!e);
+      }
+
+      if (lyr_name === 'soc') {
+        setAGBVisible(!e);
+        setBGBVisible(!e);
+        setSOCVisible(e);
+      }
+
       map.getLayers().forEach(lyr => {
-        if (lyr.get('name') === lyr_name) {
-          lyr.setVisible(e);
+        if (lyr.getClassName() !== 'ol-layer') {
+          if (lyr.get('name') === lyr_name) {
+            lyr.setVisible(e);
+          } else {
+            lyr.setVisible(!e);
+          }
         }
       });
+
     },
     [map],
   );
@@ -200,7 +227,6 @@ const Menu: React.FC<MenuProps> = ({
   }
 
   useEffect(() => {
-    console.log(category, defaultCategory, t('select_municipal'));
     oba
       .post('geom/', {
         table_name: defaultCategory === 'counties' ? 'counties' : 'drainage',
@@ -349,7 +375,7 @@ const Menu: React.FC<MenuProps> = ({
           label={t('label_agb')}
           handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
-          layerIsVisible={true}
+          layerIsVisible={agbVisible}
           legendIsVisible={true}
           layerInfoIsVisible={true}
           switchColor="#1f5582"
@@ -361,7 +387,7 @@ const Menu: React.FC<MenuProps> = ({
           label={t('label_bgb')}
           handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
-          layerIsVisible={false}
+          layerIsVisible={bgbVisible}
           legendIsVisible={true}
           layerInfoIsVisible={true}
           switchColor="#1f5582"
@@ -373,7 +399,7 @@ const Menu: React.FC<MenuProps> = ({
           label={t('label_soc')}
           handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
-          layerIsVisible={false}
+          layerIsVisible={socVisible}
           legendIsVisible={true}
           layerInfoIsVisible={true}
           switchColor="#1f5582"
