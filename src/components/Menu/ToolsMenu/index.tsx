@@ -1,16 +1,10 @@
 import React from 'react';
 
-import {
-  GiMeshBall,
-  GiStack,
-  GiRaining,
-  GiNetworkBars,
-} from 'react-icons/gi';
+import { GiMeshBall, GiStack, GiRaining, GiNetworkBars } from 'react-icons/gi';
 import { Popover } from 'antd';
 
-import { Container } from './styles';
-
 import { useTranslation } from 'react-i18next';
+import { Container } from './styles';
 
 interface ToolsMenuProps {
   ishidden: number;
@@ -18,7 +12,7 @@ interface ToolsMenuProps {
 
 const ToolsMenu: React.FC<ToolsMenuProps> = ({ ishidden }) => {
   const { t } = useTranslation();
-  
+
   return (
     <Container ishidden={ishidden}>
       <Popover
@@ -26,7 +20,9 @@ const ToolsMenu: React.FC<ToolsMenuProps> = ({ ishidden }) => {
         title={t('toolsmenu_maps')}
         content={
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <a href="http://corrente.dea.ufv.br/landuse">{t('toolsmenu_landuse')}</a>
+            <a href="http://corrente.dea.ufv.br/landuse">
+              {t('toolsmenu_landuse')}
+            </a>
             <span>{t('toolsmenu_biomass')}</span>
           </div>
         }
@@ -37,10 +33,7 @@ const ToolsMenu: React.FC<ToolsMenuProps> = ({ ishidden }) => {
         />
       </Popover>
 
-      <Popover
-        placement="right"
-        content={t('toolsmenu_onset')}
-      >
+      <Popover placement="right" content={t('toolsmenu_onset')}>
         <GiRaining
           className="text-icon"
           style={{ fontSize: 25, color: '#AAD3DF', cursor: 'pointer' }}
@@ -60,10 +53,7 @@ const ToolsMenu: React.FC<ToolsMenuProps> = ({ ishidden }) => {
         />
       </Popover>
 
-      <Popover
-        placement="right"
-        content={t('toolsmenu_mfview')}
-      >
+      <Popover placement="right" content={t('toolsmenu_mfview')}>
         <GiMeshBall
           className="text-icon"
           style={{ fontSize: 25, color: '#AAD3DF', cursor: 'pointer' }}

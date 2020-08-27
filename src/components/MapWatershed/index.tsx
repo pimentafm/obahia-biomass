@@ -21,7 +21,7 @@ import Footer from '../Footer';
 
 import CardPlot from '../CardPlotWatershed';
 
-import Popup from '../../components/Popup';
+import Popup from '../Popup';
 
 interface MapProps {
   defaultYear: number;
@@ -31,7 +31,7 @@ interface MapProps {
 
 interface WatershedsData {
   name: string;
-  centroid: Object;
+  centroid: Record<string, unknown>;
 }
 
 const Map: React.FC<MapProps> = ({
@@ -63,9 +63,9 @@ const Map: React.FC<MapProps> = ({
       projection: 'EPSG:4326',
       maxZoom: 12,
       minZoom: 7,
-      center: center,
+      center,
       extent: [-56.0, -20.0, -33.0, -6.0],
-      zoom: zoom,
+      zoom,
     }),
   );
 
@@ -76,7 +76,7 @@ const Map: React.FC<MapProps> = ({
       controls: [],
       target: undefined,
       layers: [osm, soc, bgb, agb, highways, hidrography],
-      view: view,
+      view,
       interactions: defaults({
         keyboard: false,
       }),
@@ -84,7 +84,7 @@ const Map: React.FC<MapProps> = ({
   );
 
   const highways_source = new TileWMS({
-    url: wms.defaults.baseURL + 'highwaysWatersheds.map',
+    url: `${wms.defaults.baseURL}highwaysWatersheds.map`,
     params: {
       LAYERS: 'Rodovias',
       ws: watershed.toLowerCase(),
@@ -95,7 +95,7 @@ const Map: React.FC<MapProps> = ({
   });
 
   const hidrography_source = new TileWMS({
-    url: wms.defaults.baseURL + 'hidrographyWatersheds.map',
+    url: `${wms.defaults.baseURL}hidrographyWatersheds.map`,
     params: {
       ws: watershed.toLowerCase(),
       LAYERS: 'hidrografia',
@@ -106,9 +106,9 @@ const Map: React.FC<MapProps> = ({
   });
 
   const agb_source = new TileWMS({
-    url: wms.defaults.baseURL + 'agbWatersheds.map',
+    url: `${wms.defaults.baseURL}agbWatersheds.map`,
     params: {
-      year: year,
+      year,
       ws: watershed.toLowerCase(),
       LAYERS: 'agb',
       TILED: true,
@@ -118,9 +118,9 @@ const Map: React.FC<MapProps> = ({
   });
 
   const bgb_source = new TileWMS({
-    url: wms.defaults.baseURL + 'bgbWatersheds.map',
+    url: `${wms.defaults.baseURL}bgbWatersheds.map`,
     params: {
-      year: year,
+      year,
       ws: watershed.toLowerCase(),
       LAYERS: 'bgb',
       TILED: true,
@@ -130,9 +130,9 @@ const Map: React.FC<MapProps> = ({
   });
 
   const soc_source = new TileWMS({
-    url: wms.defaults.baseURL + 'socWatersheds.map',
+    url: `${wms.defaults.baseURL}socWatersheds.map`,
     params: {
-      year: year,
+      year,
       ws: watershed.toLowerCase(),
       LAYERS: 'soc',
       TILED: true,

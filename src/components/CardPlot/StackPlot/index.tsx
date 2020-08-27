@@ -4,9 +4,9 @@ import PlotlyChart from 'react-plotlyjs-ts';
 import { oba } from '../../../services';
 
 interface StackPlotData {
-  agb: Object;
-  bgb: Object;
-  soc: Object;
+  agb: Record<string, unknown>;
+  bgb: Record<string, unknown>;
+  soc: Record<string, unknown>;
 }
 
 interface StackPlotData {
@@ -19,7 +19,6 @@ interface StackPlotProps {
 }
 
 const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
-
   const [agb, setAGB] = useState(null);
   const [bgb, setBGB] = useState(null);
   const [soc, setSOC] = useState(null);

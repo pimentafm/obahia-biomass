@@ -6,9 +6,8 @@ import OlMap from 'ol/Map';
 import MousePosition from 'ol/control/MousePosition';
 import { createStringXY } from 'ol/coordinate';
 
-import { Container } from './styles';
-
 import { useTranslation } from 'react-i18next';
+import { Container } from './styles';
 
 interface FooterProps {
   id: string;

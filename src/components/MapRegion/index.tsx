@@ -21,7 +21,7 @@ import Footer from '../Footer';
 
 import CardPlot from '../CardPlot';
 
-import Popup from '../../components/Popup';
+import Popup from '../Popup';
 
 interface MapProps {
   defaultYear: number;
@@ -54,9 +54,9 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
       projection: 'EPSG:4326',
       maxZoom: 12,
       minZoom: 7,
-      center: center,
+      center,
       extent: [-56.0, -20.0, -33.0, -6.0],
-      zoom: zoom,
+      zoom,
     }),
   );
 
@@ -67,7 +67,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
       controls: [],
       target: undefined,
       layers: [osm, soc, bgb, agb, watersheds, counties, highways, hidrography],
-      view: view,
+      view,
       interactions: defaults({
         keyboard: false,
       }),
@@ -75,7 +75,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   );
 
   const watersheds_source = new TileWMS({
-    url: wms.defaults.baseURL + 'watersheds.map',
+    url: `${wms.defaults.baseURL}watersheds.map`,
     params: {
       LAYERS: 'watersheds',
       TILED: true,
@@ -85,7 +85,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   });
 
   const counties_source = new TileWMS({
-    url: wms.defaults.baseURL + 'counties.map',
+    url: `${wms.defaults.baseURL}counties.map`,
     params: {
       LAYERS: 'counties',
       TILED: true,
@@ -95,7 +95,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   });
 
   const highways_source = new TileWMS({
-    url: wms.defaults.baseURL + 'highwaysRegion.map',
+    url: `${wms.defaults.baseURL}highwaysRegion.map`,
     params: {
       LAYERS: 'Rodovias',
       TILED: true,
@@ -105,7 +105,7 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   });
 
   const hidrography_source = new TileWMS({
-    url: wms.defaults.baseURL + 'hidrographyRegion.map',
+    url: `${wms.defaults.baseURL}hidrographyRegion.map`,
     params: {
       LAYERS: 'hidrografia',
       TILED: true,
@@ -115,9 +115,9 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   });
 
   const agb_source = new TileWMS({
-    url: wms.defaults.baseURL + 'agbRegion.map',
+    url: `${wms.defaults.baseURL}agbRegion.map`,
     params: {
-      year: year,
+      year,
       LAYERS: 'agb',
       TILED: true,
     },
@@ -126,9 +126,9 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   });
 
   const bgb_source = new TileWMS({
-    url: wms.defaults.baseURL + 'bgbRegion.map',
+    url: `${wms.defaults.baseURL}bgbRegion.map`,
     params: {
-      year: year,
+      year,
       LAYERS: 'bgb',
       TILED: true,
     },
@@ -137,9 +137,9 @@ const Map: React.FC<MapProps> = ({ defaultYear, defaultCategory }) => {
   });
 
   const soc_source = new TileWMS({
-    url: wms.defaults.baseURL + 'socRegion.map',
+    url: `${wms.defaults.baseURL}socRegion.map`,
     params: {
-      year: year,
+      year,
       LAYERS: 'soc',
       TILED: true,
     },

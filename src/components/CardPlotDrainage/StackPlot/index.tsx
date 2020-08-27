@@ -28,7 +28,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
         year1: 1990,
         year2: 2018,
         bt: 'AGB',
-        code: code,
+        code,
         table_name: tableName,
         headers: {
           'Content-type': 'application/json',
@@ -50,7 +50,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
         year1: 1990,
         year2: 2018,
         bt: 'BGB',
-        code: code,
+        code,
         table_name: tableName,
         headers: {
           'Content-type': 'application/json',
@@ -72,7 +72,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
         year1: 1990,
         year2: 2018,
         bt: 'SOC',
-        code: code,
+        code,
         table_name: tableName,
         headers: {
           'Content-type': 'application/json',
@@ -97,7 +97,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
       stackgroup: 'one',
       fillcolor: '#A58250',
       type: 'scatter',
-      //text: Array(29).fill('Formações campestres'),
+      // text: Array(29).fill('Formações campestres'),
       hovertemplate: '%{y:.5f} tCha<sup>-1</sup><extra></extra>',
       line: { color: '#A58250' },
     },

@@ -97,7 +97,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
       stackgroup: 'one',
       fillcolor: '#A58250',
       type: 'scatter',
-      //text: Array(29).fill('Formações campestres'),
+      // text: Array(29).fill('Formações campestres'),
       hovertemplate: '%{y:.5f} tCha<sup>-1</sup><extra></extra>',
       line: { color: '#A58250' },
     },
@@ -107,7 +107,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
       stackgroup: 'one',
       fillcolor: '#FD984D',
       type: 'scatter',
-      //text: Array(29).fill('Formações savânicas'),
+      // text: Array(29).fill('Formações savânicas'),
       hovertemplate: '%{y:.5f} tCha<sup>-1</sup><extra></extra>',
       line: { color: '#FD984D' },
     },
@@ -117,14 +117,14 @@ const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
       stackgroup: 'one',
       fillcolor: '#AFCE58',
       type: 'scatter',
-      //text: Array(29).fill('Formações florestais'),
+      // text: Array(29).fill('Formações florestais'),
       hovertemplate: '%{y:.5f} tCha<sup>-1</sup><extra></extra>',
       line: { color: '#AFCE58' },
     },
   ];
   const layout = {
     title: {
-      //text: '<b>Cobertura e uso do solo (1990 - 2018)</b>',
+      // text: '<b>Cobertura e uso do solo (1990 - 2018)</b>',
       font: {
         family: 'Arial, sans-serif',
         size: 14,

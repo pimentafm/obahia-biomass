@@ -21,12 +21,12 @@ import Footer from '../Footer';
 
 import CardPlot from '../CardPlotCounty';
 
-import Popup from '../../components/Popup';
+import Popup from '../Popup';
 
 interface CountyData {
   code: number;
   name: string;
-  centroid?: Object;
+  centroid?: Record<string, unknown>;
 }
 
 interface MapProps {
@@ -64,9 +64,9 @@ const Map: React.FC<MapProps> = ({
       projection: 'EPSG:4326',
       maxZoom: 12,
       minZoom: 7,
-      center: center,
+      center,
       extent: [-56.0, -20.0, -33.0, -6.0],
-      zoom: zoom,
+      zoom,
     }),
   );
 
@@ -77,7 +77,7 @@ const Map: React.FC<MapProps> = ({
       controls: [],
       target: undefined,
       layers: [osm, soc, bgb, agb, highways, hidrography],
-      view: view,
+      view,
       interactions: defaults({
         keyboard: false,
       }),
@@ -85,7 +85,7 @@ const Map: React.FC<MapProps> = ({
   );
 
   const highways_source = new TileWMS({
-    url: wms.defaults.baseURL + 'highwaysCounties.map',
+    url: `${wms.defaults.baseURL}highwaysCounties.map`,
     params: {
       code: codeName.code,
       LAYERS: 'Rodovias',
@@ -96,7 +96,7 @@ const Map: React.FC<MapProps> = ({
   });
 
   const hidrography_source = new TileWMS({
-    url: wms.defaults.baseURL + 'hidrographyCounties.map',
+    url: `${wms.defaults.baseURL}hidrographyCounties.map`,
     params: {
       code: codeName.code,
       LAYERS: 'hidrografia',
@@ -107,9 +107,9 @@ const Map: React.FC<MapProps> = ({
   });
 
   const agb_source = new TileWMS({
-    url: wms.defaults.baseURL + 'agbCounties.map',
+    url: `${wms.defaults.baseURL}agbCounties.map`,
     params: {
-      year: year,
+      year,
       code: codeName.code,
       LAYERS: 'agb',
       TILED: true,
@@ -119,9 +119,9 @@ const Map: React.FC<MapProps> = ({
   });
 
   const bgb_source = new TileWMS({
-    url: wms.defaults.baseURL + 'bgbCounties.map',
+    url: `${wms.defaults.baseURL}bgbCounties.map`,
     params: {
-      year: year,
+      year,
       code: codeName.code,
       LAYERS: 'bgb',
       TILED: true,
@@ -131,9 +131,9 @@ const Map: React.FC<MapProps> = ({
   });
 
   const soc_source = new TileWMS({
-    url: wms.defaults.baseURL + 'socCounties.map',
+    url: `${wms.defaults.baseURL}socCounties.map`,
     params: {
-      year: year,
+      year,
       code: codeName.code,
       LAYERS: 'soc',
       TILED: true,
@@ -171,9 +171,9 @@ const Map: React.FC<MapProps> = ({
 
   const handleCodeName = useCallback(
     codename => {
-      const code = parseInt(codename.split(' - ')[1]);
+      const code = parseInt(codename.split(' - ')[1], 10);
 
-      setCodeName({ code: code, name: codename });
+      setCodeName({ code, name: codename });
 
       oba
         .post('geom/', {

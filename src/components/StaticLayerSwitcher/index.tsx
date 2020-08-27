@@ -4,8 +4,8 @@ import Switch from 'react-switch';
 import { IconContext } from 'react-icons';
 import { FaInfoCircle, FaArrowAltCircleDown, FaDatabase } from 'react-icons/fa';
 
-import { Divider } from 'antd';
-import { Tooltip } from 'antd';
+import { Divider, Tooltip } from 'antd';
+
 import 'antd/dist/antd.css';
 
 import Legend from './Legend';
@@ -43,13 +43,13 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
     [visible, handleLayerVisibility],
   );
 
-  let legend = undefined;
+  let legend;
 
   if (legendIsVisible) {
-    legend = <Legend name={name} isvisible={visible}></Legend>;
+    legend = <Legend name={name} isvisible={visible} />;
   }
 
-  let layerInfo = undefined;
+  let layerInfo;
 
   if (layerInfoIsVisible) {
     layerInfo = (

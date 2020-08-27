@@ -21,7 +21,7 @@ interface LayerSwitcherProps {
   layerInfoIsVisible: boolean;
   switchColor: string;
   handleLayerOpacity(opacity: number, lyr_name: string): void;
-  handleLayerVisibility(e: boolean, obj: Object): void;
+  handleLayerVisibility(e: boolean, obj: Record<string, unknown>): void;
 }
 
 const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
