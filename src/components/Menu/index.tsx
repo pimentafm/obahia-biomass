@@ -127,6 +127,7 @@ const Menu: React.FC<MenuProps> = ({
     e => {
       setCategory(e);
       history.push(e);
+      console.log(e);
     },
     [history],
   );

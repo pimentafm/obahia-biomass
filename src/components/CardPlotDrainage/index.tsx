@@ -4,12 +4,12 @@ import { Popover } from 'antd';
 
 import { FiMenu } from 'react-icons/fi';
 
+import { useTranslation } from 'react-i18next';
+
 import { Container, Content } from './styles';
 
 import Barplot from './Barplot';
 import StackPlot from './StackPlot';
-
-import { useTranslation } from 'react-i18next';
 
 interface CardProps {
   ishidden: number;
@@ -47,7 +47,7 @@ const CardPlot: React.FC<CardProps> = ({ year, code, ishidden }) => {
 
         <label>{t('barplot_title')}</label>
         <Barplot year={year} code={code} tableName="biomass" />
-        <div className="final-space"></div>
+        <div className="final-space" />
       </Content>
     </Container>
   );
