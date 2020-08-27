@@ -378,7 +378,7 @@ const Menu: React.FC<MenuProps> = ({
           layerIsVisible={agbVisible}
           legendIsVisible={true}
           layerInfoIsVisible={true}
-          switchColor="#1f5582"
+          switchColor="#AFCE58"
           downloadURL={downloadURL}
         />
 
@@ -390,7 +390,7 @@ const Menu: React.FC<MenuProps> = ({
           layerIsVisible={bgbVisible}
           legendIsVisible={true}
           layerInfoIsVisible={true}
-          switchColor="#1f5582"
+          switchColor="#FD984D"
           downloadURL={downloadURL}
         />
 
@@ -402,7 +402,7 @@ const Menu: React.FC<MenuProps> = ({
           layerIsVisible={socVisible}
           legendIsVisible={true}
           layerInfoIsVisible={true}
-          switchColor="#1f5582"
+          switchColor="#A58250"
           downloadURL={downloadURL}
         />
 

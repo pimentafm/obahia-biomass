@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import Switch from 'react-switch';
 
 import { IconContext } from 'react-icons';
@@ -133,6 +133,7 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
             onColor={switchColor}
             checkedIcon={false}
             uncheckedIcon={false}
+            disabled={layerIsVisible}
             height={22}
             width={44}
           />
