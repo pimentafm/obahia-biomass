@@ -2,13 +2,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 import { Popover } from 'antd';
 
-import i18n from '../../../i18n';
-
-import { Container } from './styles';
-
 import ReactCountryFlag from 'react-country-flag';
 
 import { useTranslation } from 'react-i18next';
+
+import i18n from '../../../i18n';
+
+import { Container } from './styles';
 
 interface ChangeLanguageProps {
   ishidden: number;
@@ -16,7 +16,7 @@ interface ChangeLanguageProps {
 
 const ChangeLanguage: React.FC<ChangeLanguageProps> = ({ ishidden }) => {
   const { t } = useTranslation();
-  const [flag, setFlag] = useState('');
+  const [flag, setFlag] = useState('US');
 
   const handleLanguage = useCallback(locale => {
     i18n.changeLanguage(locale);
@@ -25,7 +25,7 @@ const ChangeLanguage: React.FC<ChangeLanguageProps> = ({ ishidden }) => {
   useEffect(() => {
     const language = window.navigator.language.split('-')[0];
 
-    if(language === 'en') {
+    if (language === 'en') {
       setFlag('BR');
     } else {
       setFlag('US');

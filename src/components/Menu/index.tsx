@@ -3,17 +3,15 @@ import { useHistory } from 'react-router-dom';
 
 import HtmlParser from 'react-html-parser';
 
-import { oba } from '../../services';
-
-import { Modal, Popover, Button } from 'antd';
-
+import { Modal, Popover, Button, Select } from 'antd';
 import OlMap from 'ol/Map';
+import { useTranslation } from 'react-i18next';
 
-import { Select } from 'antd';
 import 'antd/dist/antd.css';
 import { FiMenu } from 'react-icons/fi';
 import { FaInfoCircle } from 'react-icons/fa';
 import { GoAlert } from 'react-icons/go';
+import { oba } from '../../services';
 
 import ChangeLanguage from './ChangeLanguage';
 
@@ -25,8 +23,6 @@ import StaticLayerSwitcher from '../StaticLayerSwitcher';
 import LayerSwitcher from '../LayerSwitcher';
 
 import { Container, Header, Footer, Content } from './styles';
-
-import { useTranslation } from 'react-i18next';
 
 interface CodeNameData {
   code: number;
@@ -137,7 +133,7 @@ const Menu: React.FC<MenuProps> = ({
 
   const handleLayerVisibility = useCallback(
     (e, id) => {
-      const lyr_name = id; //obj.target.name;
+      const lyr_name = id; // obj.target.name;
 
       if (lyr_name === 'agb') {
         setAGBVisible(e);
@@ -166,7 +162,6 @@ const Menu: React.FC<MenuProps> = ({
           }
         }
       });
-
     },
     [map],
   );
@@ -235,16 +230,16 @@ const Menu: React.FC<MenuProps> = ({
         },
       })
       .then(response => {
-        const data = response.data;
+        const { data } = response;
 
         const names = data.map((n: CodeNameData) => n.name);
         const codes = data.map((c: CodeNameData) => c.code);
 
-        const codenames = names.map(
-          (n: string, c: number) => n + ' - ' + codes[c],
+        const code_names = names.map(
+          (n: string, c: number) => `${n} - ${codes[c]}`,
         );
 
-        setCodenames(codenames);
+        setCodenames(code_names);
       })
       .catch(e => {
         throw new Error('Do not load codenames');
@@ -321,7 +316,7 @@ const Menu: React.FC<MenuProps> = ({
 
         <div className="static-layers">
           <span className="span-text">
-            <label>{t('description_title')}</label> {t('description_content')}{' '}
+            <label>{t('description_title')} </label> {t('description_content')}{' '}
             <FaInfoCircle
               className="text-icon"
               style={{ fontSize: '12px', color: '#1f5582', cursor: 'pointer' }}
@@ -376,8 +371,8 @@ const Menu: React.FC<MenuProps> = ({
           handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
           layerIsVisible={agbVisible}
-          legendIsVisible={true}
-          layerInfoIsVisible={true}
+          legendIsVisible
+          layerInfoIsVisible
           switchColor="#AFCE58"
           downloadURL={downloadURL}
         />
@@ -388,8 +383,8 @@ const Menu: React.FC<MenuProps> = ({
           handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
           layerIsVisible={bgbVisible}
-          legendIsVisible={true}
-          layerInfoIsVisible={true}
+          legendIsVisible
+          layerInfoIsVisible
           switchColor="#FD984D"
           downloadURL={downloadURL}
         />
@@ -400,8 +395,8 @@ const Menu: React.FC<MenuProps> = ({
           handleLayerOpacity={handleLayerOpacity}
           handleLayerVisibility={handleLayerVisibility}
           layerIsVisible={socVisible}
-          legendIsVisible={true}
-          layerInfoIsVisible={true}
+          legendIsVisible
+          layerInfoIsVisible
           switchColor="#A58250"
           downloadURL={downloadURL}
         />
@@ -432,7 +427,7 @@ const Menu: React.FC<MenuProps> = ({
                 name="watersheds"
                 label={t('label_watersheds')}
                 handleLayerVisibility={handleLayerVisibility}
-                layerIsVisible={true}
+                layerIsVisible
                 legendIsVisible={false}
                 layerInfoIsVisible={false}
                 switchColor="#000000"
@@ -449,7 +444,7 @@ const Menu: React.FC<MenuProps> = ({
             </>
           )}
         </div>
-        <div className="final-space"></div>
+        <div className="final-space" />
       </Content>
 
       <Footer ishidden={hidden}>

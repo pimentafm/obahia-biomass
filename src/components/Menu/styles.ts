@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { animated } from 'react-spring';
 import { lighten } from 'polished';
+
 interface ContainerProps {
   ishidden: number;
 }

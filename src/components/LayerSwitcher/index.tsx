@@ -7,11 +7,10 @@ import { FaArrowAltCircleDown, FaDatabase } from 'react-icons/fa';
 import { Divider, Popover, Slider } from 'antd';
 import 'antd/dist/antd.css';
 
+import { useTranslation } from 'react-i18next';
 import Legend from './Legend';
 
 import { Container } from './styles';
-
-import { useTranslation } from 'react-i18next';
 
 interface LayerSwitcherProps {
   name: string;
@@ -52,13 +51,13 @@ const LayerSwitcher: React.FC<LayerSwitcherProps> = ({
     [name, handleLayerOpacity],
   );
 
-  let legend = undefined;
+  let legend;
 
   if (legendIsVisible) {
-    legend = <Legend name={name} isvisible={layerIsVisible}></Legend>;
+    legend = <Legend name={name} isvisible={layerIsVisible} />;
   }
 
-  let layerInfo = undefined;
+  let layerInfo;
 
   if (layerInfoIsVisible) {
     layerInfo = (
