@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PlotlyChart from 'react-plotlyjs-ts';
 
-import { oba } from '../../../services';
-
 import { useTranslation } from 'react-i18next';
+import { oba } from '../../../services';
 
 interface BarPlotData {
   type: string;
@@ -37,7 +36,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, code, tableName }) => {
         year1: year,
         year2: year,
         bt: 'AGB',
-        code: code,
+        code,
         table_name: tableName,
         headers: {
           'Content-type': 'application/json',
@@ -59,7 +58,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, code, tableName }) => {
         year1: year,
         year2: year,
         bt: 'BGB',
-        code: code,
+        code,
         table_name: tableName,
         headers: {
           'Content-type': 'application/json',
@@ -81,7 +80,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, code, tableName }) => {
         year1: year,
         year2: year,
         bt: 'SOC',
-        code: code,
+        code,
         table_name: tableName,
         headers: {
           'Content-type': 'application/json',
@@ -98,7 +97,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, code, tableName }) => {
         throw new Error('Do not load Barplot data');
       });
 
-      setXAxis([t('label_agb'), t('label_bgb'), t('label_soc')]);
+    setXAxis([t('label_agb'), t('label_bgb'), t('label_soc')]);
   }, [year, code, tableName, t]);
 
   const data = [
@@ -136,7 +135,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, code, tableName }) => {
         color: 'black',
       },
       autotick: false,
-      showticklabels: false,
+      showticklabels: true,
       ticks: 'outside',
       tickcolor: '#000',
     },

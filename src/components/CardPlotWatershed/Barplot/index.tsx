@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PlotlyChart from 'react-plotlyjs-ts';
 
-import { oba } from '../../../services';
-
 import { useTranslation } from 'react-i18next';
+import { oba } from '../../../services';
 
 interface BarPlotData {
   type: string;
@@ -98,7 +97,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, watershed, tableName }) => {
         throw new Error('Do not load Barplot data');
       });
 
-      setXAxis([t('label_agb'), t('label_bgb'), t('label_soc')]);
+    setXAxis([t('label_agb'), t('label_bgb'), t('label_soc')]);
   }, [year, watershed, tableName, t]);
 
   const data = [
@@ -135,7 +134,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, watershed, tableName }) => {
         color: 'black',
       },
       autotick: false,
-      showticklabels: false,
+      showticklabels: true,
       ticks: 'outside',
       tickcolor: '#000',
     },
