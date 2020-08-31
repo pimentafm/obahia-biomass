@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { GiMeshBall, GiStack, GiRaining, GiNetworkBars } from 'react-icons/gi';
+import { GiMeshBall, GiStack, GiRaining } from 'react-icons/gi';
+import { MdTrendingDown } from 'react-icons/md';
+
 import { Popover } from 'antd';
 
 import { useTranslation } from 'react-i18next';
@@ -44,7 +46,7 @@ const ToolsMenu: React.FC<ToolsMenuProps> = ({ ishidden }) => {
       </Popover>
 
       <Popover placement="right" content={t('toolsmenu_hidro')}>
-        <GiNetworkBars
+        <MdTrendingDown
           className="text-icon"
           style={{ fontSize: 25, color: '#AAD3DF', cursor: 'pointer' }}
           onClick={() =>
