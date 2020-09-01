@@ -176,6 +176,19 @@ const Menu: React.FC<MenuProps> = ({
     [map],
   );
 
+  const handleStaticLayerVisibility = useCallback(
+    (e, id) => {
+      const lyr_name = id;
+
+      map.getLayers().forEach(lyr => {
+        if (lyr.get('name') === lyr_name) {
+          lyr.setVisible(e);
+        }
+      });
+    },
+    [map],
+  );
+
   let watershedsLabel = null;
   let watershedSelect = null;
 
@@ -405,7 +418,7 @@ const Menu: React.FC<MenuProps> = ({
           <StaticLayerSwitcher
             name="hidrography"
             label={t('label_hidrography')}
-            handleLayerVisibility={handleLayerVisibility}
+            handleLayerVisibility={handleStaticLayerVisibility}
             layerIsVisible={false}
             legendIsVisible={false}
             layerInfoIsVisible={false}
@@ -414,19 +427,19 @@ const Menu: React.FC<MenuProps> = ({
           <StaticLayerSwitcher
             name="highways"
             label={t('label_highways')}
-            handleLayerVisibility={handleLayerVisibility}
+            handleLayerVisibility={handleStaticLayerVisibility}
             layerIsVisible={false}
             legendIsVisible={false}
             layerInfoIsVisible={false}
             switchColor="#800000"
           />
 
-          {defaultCategory === 'Regional' && (
+          {defaultCategory === 'regional' && (
             <>
               <StaticLayerSwitcher
                 name="watersheds"
                 label={t('label_watersheds')}
-                handleLayerVisibility={handleLayerVisibility}
+                handleLayerVisibility={handleStaticLayerVisibility}
                 layerIsVisible
                 legendIsVisible={false}
                 layerInfoIsVisible={false}
@@ -435,7 +448,7 @@ const Menu: React.FC<MenuProps> = ({
               <StaticLayerSwitcher
                 name="counties"
                 label={t('label_municipalities')}
-                handleLayerVisibility={handleLayerVisibility}
+                handleLayerVisibility={handleStaticLayerVisibility}
                 layerIsVisible={false}
                 legendIsVisible={false}
                 layerInfoIsVisible={false}
