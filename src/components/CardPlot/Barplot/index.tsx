@@ -157,7 +157,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, tableName }) => {
       autotick: false,
       ticks: 'outside',
       tick0: 0,
-      dtick: 2000,
+      dtick: 2,
       ticklen: 6,
       tickwidth: 1,
       tickcolor: '#000',

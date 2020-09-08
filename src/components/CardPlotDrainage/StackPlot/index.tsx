@@ -164,7 +164,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
       autotick: false,
       ticks: 'outside',
       tick0: 0,
-      dtick: 100,
+      dtick: 0.1,
       ticklen: 6,
       tickwidth: 1,
       tickcolor: '#000',
