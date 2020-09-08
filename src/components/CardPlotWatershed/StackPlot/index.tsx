@@ -98,7 +98,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
       fillcolor: '#A58250',
       type: 'scatter',
       // text: Array(29).fill('Formações campestres'),
-      hovertemplate: '%{y:.5f} GgC<extra></extra>',
+      hovertemplate: '%{y:.5f} Gg-C<extra></extra>',
       line: { color: '#A58250' },
     },
     {
@@ -108,7 +108,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
       fillcolor: '#FD984D',
       type: 'scatter',
       // text: Array(29).fill('Formações savânicas'),
-      hovertemplate: '%{y:.5f} GgC<extra></extra>',
+      hovertemplate: '%{y:.5f} Gg-C<extra></extra>',
       line: { color: '#FD984D' },
     },
     {
@@ -118,7 +118,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
       fillcolor: '#AFCE58',
       type: 'scatter',
       // text: Array(29).fill('Formações florestais'),
-      hovertemplate: '%{y:.5f} GgC<extra></extra>',
+      hovertemplate: '%{y:.5f} Gg-C<extra></extra>',
       line: { color: '#AFCE58' },
     },
   ];
@@ -152,7 +152,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ watershed, tableName }) => {
     },
     yaxis: {
       title: {
-        text: 'GgC',
+        text: 'Gg-C',
       },
       titlefont: {
         family: 'Arial, sans-serif',
