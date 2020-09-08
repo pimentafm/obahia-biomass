@@ -399,7 +399,7 @@ const Menu: React.FC<MenuProps> = ({
           legendIsVisible
           layerInfoIsVisible
           switchColor="#FD984D"
-          downloadURL={downloadURL}
+          downloadURL={downloadURL.replace('AGB', 'BGB')}
         />
 
         <LayerSwitcher
@@ -411,7 +411,7 @@ const Menu: React.FC<MenuProps> = ({
           legendIsVisible
           layerInfoIsVisible
           switchColor="#A58250"
-          downloadURL={downloadURL}
+          downloadURL={downloadURL.replace('AGB', 'SOC')}
         />
 
         <div className="static-layers">

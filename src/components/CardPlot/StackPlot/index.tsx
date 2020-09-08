@@ -99,7 +99,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
       stackgroup: 'one',
       fillcolor: '#A58250',
       type: 'scatter',
-      hovertemplate: '%{y:.5f} tCha<sup>-1</sup><extra></extra>',
+      hovertemplate: '%{y:.5f} GgC<extra></extra>',
       line: { color: '#A58250' },
     },
     {
@@ -108,7 +108,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
       stackgroup: 'one',
       fillcolor: '#FD984D',
       type: 'scatter',
-      hovertemplate: '%{y:.5f} tCha<sup>-1</sup><extra></extra>',
+      hovertemplate: '%{y:.5f} GgC<extra></extra>',
       line: { color: '#FD984D' },
     },
     {
@@ -117,8 +117,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
       stackgroup: 'one',
       fillcolor: '#AFCE58',
       type: 'scatter',
-      hovertemplate:
-        '%{y:.5f} x 10<sup>3</sup> tCha<sup>-1</sup><extra></extra>',
+      hovertemplate: '%{y:.5f} GgC<extra></extra>',
       line: { color: '#AFCE58' },
     },
   ];
@@ -151,7 +150,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ tableName }) => {
     },
     yaxis: {
       title: {
-        text: 'tCha<sup>-1</sup>)',
+        text: 'GgC',
       },
       titlefont: {
         family: 'Arial, sans-serif',
