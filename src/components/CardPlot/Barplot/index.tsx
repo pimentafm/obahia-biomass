@@ -121,14 +121,6 @@ const Barplot: React.FC<BarplotProps> = ({ year, tableName }) => {
     },
     height: 300,
     xaxis: {
-      title: {
-        text: t('label_plot_xaxis'),
-      },
-      titlefont: {
-        family: 'Arial, sans-serif',
-        size: 12,
-        color: '#000',
-      },
       tickfont: {
         family: 'Arial, sans-serif',
         size: 12,
@@ -163,7 +155,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, tableName }) => {
       tickcolor: '#000',
     },
     showlegend: false,
-    margin: { l: 60, r: 10, t: 0, b: 50 },
+    margin: { l: 60, r: 10, t: 0, b: 55 },
     transition: {
       duration: 1000,
       easing: 'quad-in-out',
