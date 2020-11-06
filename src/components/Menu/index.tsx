@@ -526,8 +526,40 @@ const Menu: React.FC<MenuProps> = ({
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph03')}</p>
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph04')}</p>
         <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph05')}</p>
-        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph06')}</p>
-        <p style={{ textAlign: 'justify' }}>{t('modal_info_paraghaph07')}</p>
+        <p style={{ textAlign: 'justify' }}>
+          {t('modal_info_ref01')}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0241637"
+          >
+            {' '}
+            https://doi.org/10.1016/j.agrformet.2018.02.031
+          </a>
+        </p>
+
+        <p style={{ textAlign: 'justify' }}>
+          {t('modal_info_ref02')}
+          <a
+            rel="noopener noreferrer"
+            href="http://www.posmet.ufv.br/wp-content/uploads/2020/07/TESE-EMILY-ANE-DIONIZIO-DA-SILVA.pdf"
+          >
+            {' '}
+            Download
+          </a>
+        </p>
+
+        <p style={{ textAlign: 'justify' }}>
+          {t('modal_info_ref03')}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://doi.pangaea.de/10.1594/PANGAEA.923885"
+          >
+            {' '}
+            https://doi.org/10.1594/PANGAEA.923885
+          </a>
+        </p>
       </Modal>
     </Container>
   );
