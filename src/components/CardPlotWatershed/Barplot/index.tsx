@@ -25,9 +25,9 @@ const Barplot: React.FC<BarplotProps> = ({ year, watershed, tableName }) => {
   const [colors] = useState(['#AFCE58', '#FD984D', '#A58250']);
 
   const [xaxis, setXAxis] = useState([
-    t('label_agb'),
-    t('label_bgb'),
-    t('label_soc'),
+    t('label_agb_barplot'),
+    t('label_bgb_barplot'),
+    t('label_soc_barplot'),
   ]);
 
   useEffect(() => {
