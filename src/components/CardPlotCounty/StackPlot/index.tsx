@@ -98,7 +98,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
       fillcolor: '#A58250',
       type: 'scatter',
       // text: Array(29).fill('Formações campestres'),
-      hovertemplate: '%{y:.5f} Gg-C<extra></extra>',
+      hovertemplate: '%{y:.5f} x 10<sup>3</sup> Gg-C<extra></extra>',
       line: { color: '#A58250' },
     },
     {
@@ -107,7 +107,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
       stackgroup: 'one',
       fillcolor: '#FD984D',
       type: 'scatter',
-      hovertemplate: '%{y:.5f} Gg-C<extra></extra>',
+      hovertemplate: '%{y:.5f} x 10<sup>3</sup> Gg-C<extra></extra>',
       line: { color: '#FD984D' },
     },
     {
@@ -116,7 +116,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
       stackgroup: 'one',
       fillcolor: '#AFCE58',
       type: 'scatter',
-      hovertemplate: '%{y:.5f} Gg-C<extra></extra>',
+      hovertemplate: '%{y:.5f} x 10<sup>3</sup> Gg-C<extra></extra>',
       line: { color: '#AFCE58' },
     },
   ];
@@ -150,7 +150,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
     },
     yaxis: {
       title: {
-        text: 'Gg-C',
+        text: '10<sup>3</sup> Gg-C',
       },
       titlefont: {
         family: 'Arial, sans-serif',
@@ -166,7 +166,7 @@ const StackPlot: React.FC<StackPlotProps> = ({ code, tableName }) => {
       autotick: false,
       ticks: 'outside',
       tick0: 0,
-      dtick: 100,
+      dtick: 0.2,
       ticklen: 6,
       tickwidth: 1,
       tickcolor: '#000',

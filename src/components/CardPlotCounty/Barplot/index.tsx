@@ -106,7 +106,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, code, tableName }) => {
       y: [agb, bgb, soc],
       stackgroup: 'one',
       type: 'bar',
-      hovertemplate: '%{y:.5f} Gg-C<extra></extra>',
+      hovertemplate: '%{y:.5f} x 10<sup>3</sup> Gg-C<extra></extra>',
       marker: { color: colors },
     },
   ];
@@ -133,7 +133,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, code, tableName }) => {
     },
     yaxis: {
       title: {
-        text: 'Gg-C',
+        text: '10<sup>3</sup> Gg-C',
       },
       titlefont: {
         family: 'Arial, sans-serif',
@@ -149,7 +149,7 @@ const Barplot: React.FC<BarplotProps> = ({ year, code, tableName }) => {
       autotick: false,
       ticks: 'outside',
       tick0: 0,
-      dtick: 1,
+      dtick: 0.2,
       ticklen: 6,
       tickwidth: 1,
       tickcolor: '#000',
